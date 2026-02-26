@@ -9,7 +9,7 @@
             "name": "C/C++ Debug (gdb Launch)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/a.out",
+            "program": "${workspaceFolder}/ft_split",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
