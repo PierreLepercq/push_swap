@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:23:03 by plepercq          #+#    #+#             */
-/*   Updated: 2026/02/26 18:50:18 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/02/27 15:47:53 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,23 @@
 #include <stddef.h>
 #include <stdio.h>
 
-int	split_count(char *str, char sep)
+int	get_charset_id(char c, char *charset)
+{
+	int	i;
+
+	if (!charset)
+		return (-1);
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	split_count(char *str, char *charset)
 {
 	int	i;
 	int	count;
@@ -23,7 +39,7 @@ int	split_count(char *str, char sep)
 	while (*str)
 	{
 		i = 1;
-		while (str[i] != sep && str[i])
+		while (get_charset_id(str[i], charset) == -1 && str[i])
 			i++;
 		if (i > 1)
 			count++;
@@ -43,6 +59,7 @@ char	*ft_substr(const char *str, int start, int len)
 	strlen = 0;
 	while (str[strlen] != '\0')
 		strlen++;
+	substrlen = 0;
 	if (start < strlen)
 		substrlen = 0;
 	else if (strlen - start < len)
@@ -67,34 +84,33 @@ void	del_tab(char **strs, int tab_id)
 	free(strs);
 }
 
-char	**ft_split(char *str, char sep)
+char	**ft_split(char *str, char *charset)
 {
-	int		sublen;
+	int		len;
 	int		tab_id;
 	int		tab_size;
 	char	*substr;
 	char	**strs;
 
-	tab_size = split_count(str, sep);
+	tab_size = split_count(str, charset);
 	strs = malloc(sizeof(char **) * (tab_size + 1));
 	if (!strs)
 		return (NULL);
 	tab_id = 0;
 	while (tab_id < tab_size)
 	{
-		sublen = 0;
-		while (*str == sep)
+		while (get_charset_id(*str, charset) >= 0)
 			str++;
-		while (str[sublen] != sep && str[sublen] != '\0')
-			sublen++;
-		substr = ft_substr(str, 0, sublen);
+		len = 0;
+		while (get_charset_id(str[len], charset) == -1 && str[len] != '\0')
+			len++;
+		substr = ft_substr(str, 0, len);
 		if (!substr)
 			return (del_tab(strs, tab_id), NULL);
 		strs[tab_id++] = substr;
-		str += sublen;
+		str += len;
 	}
-	strs[tab_id] = NULL;
-	return (strs);
+	return (strs[tab_id] = NULL, strs);
 }
 
 /*
@@ -102,16 +118,19 @@ int	main(int argc, char**argv)
 {
 	int		id;
 	char	*str = "Ceci est un test!";
+	char	*charset = " ";
 	char	**strs;
 
-	(void)argc;
-	(void)argv;
-	
+	if (argc > 1)
+		str = argv[1];
+
+	if (argc > 2)
+		charset = argv[2];
+
 	printf("str : %s\n", str);
-	
-	strs = ft_split(str, ' ');
-	
-	//return (1);
+	printf("charset : %s\n", charset);
+
+	strs = ft_split(str, charset);
 
 	if (!strs)
 		return (0);
@@ -119,7 +138,7 @@ int	main(int argc, char**argv)
 	id = 0;
 	while (strs[id])
 	{
-		printf("word %i : %s\n", id, strs[id]);
+		printf("[%i] %s\n", id, strs[id]);
 		id++;
 	}
 }
