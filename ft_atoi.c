@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/02 17:10:18 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/13 19:02:27 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/16 18:43:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
-
-# include <stdlib.h>
-# include <stddef.h>
-
-typedef struct s_stack_node
+int	ft_atoi(const char *s)
 {
-	int					id;
-	int					value;
-	int					cost;
-	struct s_stack_node	*prev;
-	struct s_stack_node	*next;
-}	t_stack_node;
+	int	i;
+	int	nbr;
+	int	sign;
 
-#endif
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
+		i++;
+	if (s[i] == '+' || s[i] == '-')
+	{
+		if (s[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += sign * (s[i] - '0');
+		i++;
+	}
+	return (nbr);
+}

@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/02 17:10:18 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/13 19:02:42 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/18 18:53:58 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stddef.h>
-
-typedef struct s_stack_node
+char	*ft_strchr(const char *s, int c)
 {
-	int					id;
-	int					value;
-	int					cost;
-	struct s_stack_node	*prev;
-	struct s_stack_node	*next;
-}	t_stack_node;
+	size_t	i;
 
-#endif
+	i = 0;
+	while (i <= ft_strlen(s))
+	{
+		if ((char)c == s[i])
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
+}
