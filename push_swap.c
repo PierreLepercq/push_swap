@@ -6,13 +6,13 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/02 19:20:59 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/03 18:19:16 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev, t_stack_node *next)
+t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev)
 {
 	t_stack_node	*new;
 
@@ -24,15 +24,13 @@ t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev, t_stack_node
 	new->prev = prev;
 	if (prev != NULL)
 		prev->next = new;
-	new->next = next;
-	if (next != NULL)
-		next->prev = new;
 	return (new);
 }
 
 t_stack_node	*init_stack(char **inputs, int len)
 {
 	int				id;
+	int				i;
 	int				value;
 	t_stack_node	*node;
 	t_stack_node	*prev_node;
@@ -41,7 +39,13 @@ t_stack_node	*init_stack(char **inputs, int len)
 	prev_node = NULL;
 	while (id < len)
 	{
-		node = new_stack_node(id, inputs[id], prev_node, NULL);
+		i = 0;
+		while (inputs[id][i] != NULL)
+		{
+			if (ft_strchr(" 0123456789-+", inputs[id][i++]) == NULL)
+				return (delete_stack(node), NULL);
+		}
+		node = new_stack_node(id, inputs[id], prev_node);
 		prev_node = node;
 		id++;
 	}
@@ -75,8 +79,8 @@ t_stack_node	*init_stack_from_str(char *str)
 
 int	main(int argc, char **argv)
 {
-	t_stack_node	*a_stack;
-	t_stack_node	*b_stack;
+	t_stack_node *a_stack;
+	t_stack_node *b_stack;
 
 	// Initialize stacks
 	a_stack = NULL;
@@ -84,7 +88,7 @@ int	main(int argc, char **argv)
 
 	// Handle no inputs
 	if (argc == 1 || (argc == 2 && argv[1] == ""))
-		return;
+		return ;
 
 	// Init stack a
 	if (argc == 2)
