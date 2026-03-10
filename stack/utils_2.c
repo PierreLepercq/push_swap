@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/10 18:08:29 by plepercq         ###   ########.fr       */
+/*   Created: 2026/03/10 18:36:43 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/10 19:04:37 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "stack.h"
 
-# include <stdlib.h>
-# include <stddef.h>
-
-typedef struct s_stack
+void	stack_add_front(t_stack **stack, t_stack *new)
 {
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	if (!new)
+		return ;
+	new->next = *stack;
+	if (*stack)
+		(*stack)->prev = new;
+	*stack = new;
+	stack_index(*stack);
+}
 
-#endif
+void	stack_add_back(t_stack **stack, t_stack *new)
+{
+	t_stack	*last;
+
+	last = stack_last(*stack);
+	last->next = new;
+	new->prev = last;
+	new->id = new->prev->id + 1;
+}

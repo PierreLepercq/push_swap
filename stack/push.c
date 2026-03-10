@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/10 18:08:29 by plepercq         ###   ########.fr       */
+/*   Created: 2026/03/10 13:59:32 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/10 19:07:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "stack.h"
 
-# include <stdlib.h>
-# include <stddef.h>
-
-typedef struct s_stack
+void	push(t_stack **src, t_stack **dst)
 {
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	int		id;
+	t_stack	*node;
 
-#endif
+	if (*src == NULL)
+		return ;
+	node = *src;
+	*src = node->next;
+	node->next->prev = NULL;
+	stack_index(*src);
+	stack_add_front(dst, node);
+}

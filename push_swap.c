@@ -6,26 +6,11 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/03 18:19:16 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/10 18:12:33 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev)
-{
-	t_stack_node	*new;
-
-	new = malloc(sizeof(t_stack_node));
-	if (!new)
-		return (NULL);
-	new->id = id;
-	new->value = value;
-	new->prev = prev;
-	if (prev != NULL)
-		prev->next = new;
-	return (new);
-}
 
 t_stack_node	*init_stack(char **inputs, int len)
 {
