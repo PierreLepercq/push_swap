@@ -1,0 +1,30 @@
+# Nom de la librairie (sans le préfixe 'lib' ni l'extension)
+LIB_NAME = ma_lib
+
+# Chemins déterminés automatiquement
+LIB_DIR = lib/$(LIB_NAME)
+LIB_INCLUDE = $(LIB_DIR)/include
+LIB_SRC = $(LIB_DIR)/src
+LIB_OBJ = $(LIB_DIR)/lib$(LIB_NAME).a
+
+# Fichiers sources et objets
+SRC = src/main.c
+OBJ = $(SRC:.c=.o)
+
+# Compilateur et options
+CC = gcc
+CFLAGS = -I$(LIB_INCLUDE) -Wall
+
+all: main
+
+main: $(OBJ) $(LIB_OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ -L$(LIB_DIR) -l$(LIB_NAME)
+
+$(LIB_OBJ): $(wildcard $(LIB_SRC)/*.c)
+	$(AR) rcs $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) main $(LIB_OBJ)

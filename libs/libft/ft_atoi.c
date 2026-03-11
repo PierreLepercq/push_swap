@@ -6,9 +6,11 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:02:27 by plepercq          #+#    #+#             */
-/*   Updated: 2025/11/16 18:43:14 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/05 17:01:37 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_atoi(const char *s)
 {

@@ -5,46 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/08 13:49:04 by plepercq         ###   ########.fr        #
+#    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
+#    Updated: 2026/03/05 17:11:07 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= push_swap
+NAME	= libft.a
 
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
+CC 		= cc
+CFLAGS	= -Wall -Wextra -Werror
 
-LIBS	= libft
-ARcHS	= $(addprefix $())
-CFILES 	= push_swap.c
+FUNCTIONS = atoi split strchr substr
+
+CFILES = $(patsubst %, ft_%.c, $(FUNCTIONS))
 OBJECTS	= $(patsubst %.c, %.o, $(CFILES))
 
-$(ARCHS): $(LIBS)
-	make -C $^ all
-
 $(NAME): $(OBJECTS)
+	ar -rcs $@ $^
 
 all: $(NAME)
 
 clean:
 	rm -rf $(OBJECTS)
-	make -C $(LIBS) clean
 
 fclean:
 	rm -rf $(NAME) $(OBJECTS)
-	make -C $(LIBS) fclean
 
 re: fclean all
 
-test: $(ARCHS)
-	$(CC) $(CFLAGS) $(CFILES) $(ARCHS) -L $(LIBS)
+%.o:%.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
-test2: $(CFILES) $(ARCHS)
-	$(CC) $(CFLAGS) -I $(ARCHS) $(CFILES)
-	./a.out 56 42 27 -51 -7 12 24 -16 35 0
-
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(LIBS) -c $^ -o $@
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:02:42 by plepercq          #+#    #+#             */
-/*   Updated: 2025/11/18 18:53:58 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/05 17:02:36 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 char	*ft_strchr(const char *s, int c)
 {
 	size_t	i;
+	size_t	len;
 
 	i = 0;
-	while (i <= ft_strlen(s))
+	len = 0;
+	while (s[len])
+		len++;
+	while (i <= len)
 	{
 		if ((char)c == s[i])
 			return ((char *)(s + i));

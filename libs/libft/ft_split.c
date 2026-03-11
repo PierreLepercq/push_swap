@@ -6,29 +6,11 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:23:03 by plepercq          #+#    #+#             */
-/*   Updated: 2026/02/27 15:47:53 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/05 17:02:21 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdio.h>
-
-int	get_charset_id(char c, char *charset)
-{
-	int	i;
-
-	if (!charset)
-		return (-1);
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (i);
-		i++;
-	}
-	return (-1);
-}
+#include "libft.h"
 
 int	split_count(char *str, char *charset)
 {
@@ -39,42 +21,13 @@ int	split_count(char *str, char *charset)
 	while (*str)
 	{
 		i = 1;
-		while (get_charset_id(str[i], charset) == -1 && str[i])
+		while (ft_strchr(charset, str[i]) == NULL && str[i])
 			i++;
 		if (i > 1)
 			count++;
 		str += i;
 	}
 	return (count);
-}
-
-char	*ft_substr(const char *str, int start, int len)
-{
-	int		strlen;
-	int		substrlen;
-	char	*substr;
-
-	if (!str)
-		return (NULL);
-	strlen = 0;
-	while (str[strlen] != '\0')
-		strlen++;
-	substrlen = 0;
-	if (start < strlen)
-		substrlen = 0;
-	else if (strlen - start < len)
-		substrlen = strlen - start;
-	substr = malloc(sizeof(char) * (substrlen + 1));
-	if (!substr)
-		return (NULL);
-	strlen = 0;
-	while (strlen < len)
-	{
-		substr[strlen] = str[start + strlen];
-		strlen++;
-	}
-	substr[strlen] = '\0';
-	return (substr);
 }
 
 void	del_tab(char **strs, int tab_id)
@@ -99,10 +52,10 @@ char	**ft_split(char *str, char *charset)
 	tab_id = 0;
 	while (tab_id < tab_size)
 	{
-		while (get_charset_id(*str, charset) >= 0)
+		while (ft_strchr(charset, *str) != NULL)
 			str++;
 		len = 0;
-		while (get_charset_id(str[len], charset) == -1 && str[len] != '\0')
+		while (ft_strchr(charset, str[len]) == NULL && str[len] != '\0')
 			len++;
 		substr = ft_substr(str, 0, len);
 		if (!substr)
@@ -112,8 +65,9 @@ char	**ft_split(char *str, char *charset)
 	}
 	return (strs[tab_id] = NULL, strs);
 }
-
 /*
+#include <stdio.h>
+
 int	main(int argc, char**argv)
 {
 	int		id;
@@ -141,5 +95,4 @@ int	main(int argc, char**argv)
 		printf("[%i] %s\n", id, strs[id]);
 		id++;
 	}
-}
-*/
+}*/

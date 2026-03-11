@@ -1,0 +1,45 @@
+# Liste des noms de librairies (sans le préfixe 'lib' ni l'extension)
+LIBS = lib1 lib2
+
+# Chemins déterminés automatiquement
+LIB_DIR = lib
+LIB_INCLUDES = $(addprefix $(LIB_DIR)/,$(addsuffix /include,$(LIBS)))
+LIB_SRCS = $(addprefix $(LIB_DIR)/,$(addsuffix /src,$(LIBS)))
+LIB_OBJS = $(addprefix $(LIB_DIR)/lib,$(addsuffix .a,$(LIBS)))
+
+# Fichiers sources et objets du programme principal
+SRC = src/main.c
+OBJ = $(SRC:.c=.o)
+
+# Compilateur et options
+CC = gcc
+CFLAGS = $(addprefix -I,$(LIB_INCLUDES)) -Wall
+
+# Nom de l'archive et dossier de distribution
+DIST_DIR = dist
+ARCHIVE_NAME = libs-$(shell date +%Y%m%d).tar.gz
+
+all: main
+
+main: $(OBJ) $(LIB_OBJS)
+	$(CC) $(CFLAGS) -o $@ $^ $(addprefix -l,$(LIBS)) $(addprefix -L$(LIB_DIR)/,$(LIBS))
+
+# Règle pour générer chaque librairie
+$(LIB_OBJS): $(LIB_DIR)/lib%.a: $(wildcard $(LIB_DIR)/%/src/*.c)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $^
+	$(AR) rcs $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Règle pour créer l'archive des librairies
+archive: $(LIB_OBJS)
+	@mkdir -p $(DIST_DIR)
+	@echo "Création de l'archive $(ARCHIVE_NAME) dans $(DIST_DIR)/"
+	@tar -czf $(DIST_DIR)/$(ARCHIVE_NAME) -C $(LIB_DIR) $(addsuffix /lib,$(addsuffix .a,$(LIBS))) $(addsuffix /include,$(LIBS))
+
+clean:
+	rm -f $(OBJ) main $(LIB_OBJS) $(wildcard $(LIB_SRCS)/*.o)
+
+.PHONY: all clean archive

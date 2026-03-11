@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/05 17:15:22 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/05 17:04:26 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
-# include <stdlib.h>
 # include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-typedef struct s_stack_node
-{
-	int					id;
-	int					value;
-	int					cost;
-	struct s_stack_node	*prev;
-	struct s_stack_node	*next;
-}	t_stack_node;
-
-/*	MAIN FUNCTIONS	*/
-
+int	    ft_atoi(const char *s);
+char	**ft_split(char *str, char *charset);
+char	*ft_strchr(const char *s, int c);
+char	*ft_substr(const char *str, int start, int len);
 
 #endif
