@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/11 13:16:33 by plepercq         ###   ########.fr       */
+/*   Created: 2026/03/10 14:32:33 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/10 18:57:37 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "stack.h"
 
-# include <stdlib.h>
-# include <stddef.h>
-
-typedef struct s_stack
+void	swap(t_stack **stack)
 {
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*third;
 
-/*	MAIN FUNCTIONS	*/
-
-
-#endif
+	if (stack == NULL)
+		return ;
+	first = *stack;
+	second = first->next;
+	if (second == NULL)
+		return ;
+	third = second->next;
+	first->id = 2;
+	first->next = third;
+	first->prev = second;
+	second->id = 1;
+	second->next = first;
+	second->prev = NULL;
+	*stack = second;
+}
