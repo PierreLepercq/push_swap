@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/05 17:11:07 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/13 19:11:42 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CFLAGS	= -Wall -Wextra -Werror
 
 FUNCTIONS = atoi split strchr substr
 
-CFILES = $(patsubst %, ft_%.c, $(FUNCTIONS))
-OBJECTS	= $(patsubst %.c, %.o, $(CFILES))
+PREFIX = ft_
+CFILES = $(addprefix $(PREFIX), $(addsuffix .c, $(FUNCTIONS)))
+OBJECTS	= $(CFILES:.c=.o)
 
 $(NAME): $(OBJECTS)
 	ar -rcs $@ $^
