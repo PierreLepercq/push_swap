@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/14 18:27:33 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/15 01:54:42 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ test2: $(CFILES) $(ARC11HS)
 %.o: %.c
 	$(CC) $(CFLAGS) -I $(LIBS) -c $^ -o $@
 
-%/%.a:
+./%/%.a:
 	make -C $* all
 
 .PHONY: all clean fclean re
