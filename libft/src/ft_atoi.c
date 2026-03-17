@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/13 19:11:25 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/13 19:02:27 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/17 14:54:41 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+int	ft_atoi(const char *s)
+{
+	int	i;
+	int	nbr;
+	int	sign;
 
-# include <stddef.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-int		ft_atoi(const char *s);
-char	**ft_split(char *str, char *charset);
-char	*ft_strchr(const char *s, int c);
-char	*ft_substr(const char *str, int start, int len);
-
-#endif
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
+		i++;
+	if (s[i] == '+' || s[i] == '-')
+	{
+		if (s[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		nbr *= 10;
+		nbr += sign * (s[i] - '0');
+		i++;
+	}
+	return (nbr);
+}

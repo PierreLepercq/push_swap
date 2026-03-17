@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   w_char.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 15:56:41 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/25 18:14:51 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/17 15:35:57 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include "libft.h"
-
-typedef struct s_stack
+int	w_char(char c)
 {
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
-
-/*	MAIN FUNCTIONS	*/
-
-
-#endif
+	write(1, &c, 1);
+	return (1);
+}

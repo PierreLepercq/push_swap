@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   w_str.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/13 19:02:27 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/05 17:01:37 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/25 18:14:51 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/17 15:35:36 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *s)
+int	w_str(char *str)
 {
-	int	i;
-	int	nbr;
-	int	sign;
+	int	len;
 
-	i = 0;
-	nbr = 0;
-	sign = 1;
-	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
-		i++;
-	if (s[i] == '+' || s[i] == '-')
-	{
-		if (s[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		nbr *= 10;
-		nbr += sign * (s[i] - '0');
-		i++;
-	}
-	return (nbr);
+	if (str == NULL)
+		return (write(1, "(null)", 6), 6);
+	len = 0;
+	while (str[len] != '\0')
+		len++;
+	if (len != 0)
+		write(1, str, len);
+	return (len);
 }

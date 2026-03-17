@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   w_ptr_adress.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 15:56:41 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/25 18:14:51 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/17 15:35:30 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include "libft.h"
-
-typedef struct s_stack
+int	w_ptr_adress(unsigned long ptr)
 {
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
-
-/*	MAIN FUNCTIONS	*/
-
-
-#endif
+	if (ptr == 0)
+		return (write(1, "(nil)", 5), 5);
+	write(1, "0x", 2);
+	return (w_unbr_base(ptr, "0123456789abcdef") + 2);
+}

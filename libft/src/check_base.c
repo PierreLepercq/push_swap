@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   check_base.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 18:36:43 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/10 19:04:37 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/25 18:14:51 by plepercq          #+#    #+#             */
+/*   Updated: 2026/01/18 16:16:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-
-void	stack_add_front(t_stack **stack, t_stack *new)
+int	check_base(char *base)
 {
-	if (!new)
-		return ;
-	new->next = *stack;
-	if (*stack)
-		(*stack)->prev = new;
-	*stack = new;
-	stack_index(*stack);
-}
+	int	len;
+	int	i;
 
-void	stack_add_back(t_stack **stack, t_stack *new)
-{
-	t_stack	*last;
-
-	last = stack_last(*stack);
-	last->next = new;
-	new->prev = last;
-	new->id = new->prev->id + 1;
+	len = 0;
+	while (base[len])
+	{
+		i = 1;
+		while (base[len + i])
+		{
+			if (base[len] == base[len + i])
+				return (0);
+			i++;
+		}
+		if (base[len] == '+' || base[len] == '-')
+			return (0);
+		len++;
+	}
+	if (len < 2)
+		return (0);
+	return (1);
 }

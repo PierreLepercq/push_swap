@@ -6,20 +6,17 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/11 13:16:27 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/17 16:36:25 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
-#include <stddef.h>
-#include <unistd.h>
 
-t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev)
+t_stack	*new_stack_node(int id, int value, t_stack *prev)
 {
-	t_stack_node	*new;
+	t_stack	*new;
 
-	new = malloc(sizeof(t_stack_node));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
 	new->id = id;
@@ -30,13 +27,13 @@ t_stack_node	*new_stack_node(int id, int value, t_stack_node *prev)
 	return (new);
 }
 
-void	delete_stack(t_stack_node *node)
+void	delete_stack(t_stack *node)
 {
-	t_stack_node	*prev;
-	t_stack_node	*last;
+	t_stack	*prev;
+	t_stack	*last;
 
 	if (node == NULL)
-		return;
+		return ;
 	last = node;
 	while (last->next != NULL)
 		last = last->next;
@@ -48,13 +45,13 @@ void	delete_stack(t_stack_node *node)
 	}
 }
 
-t_stack_node	*init_stack(char **inputs, int len)
+t_stack	*init_stack(char **inputs, int len)
 {
-	int				id;
-	int				i;
-	int				value;
-	t_stack_node	*node;
-	t_stack_node	*prev_node;
+	int		id;
+	int		i;
+	int		value;
+	t_stack	*node;
+	t_stack	*prev_node;
 
 	id = 0;
 	prev_node = NULL;
@@ -63,7 +60,7 @@ t_stack_node	*init_stack(char **inputs, int len)
 		i = 0;
 		while ((inputs[id])[i] != '\0')
 		{
-			//printf("test %s \n", ft_strchr("0123456789-+", inputs[id][i++]));
+			//ft_printf("test %s \n", ft_strchr("0123456789-+", inputs[id][i++]));
 			if (ft_strchr(" 0123456789-+", inputs[id][i++]) == NULL)
 				return (delete_stack(prev_node), NULL);
 		}
@@ -77,11 +74,11 @@ t_stack_node	*init_stack(char **inputs, int len)
 	return (prev_node);
 }
 
-t_stack_node	*init_stack_from_str(char *str)
+t_stack	*init_stack_from_str(char *str)
 {
-	int				i;
-	char			**strs;
-	t_stack_node	*stack;
+	int		i;
+	char	**strs;
+	t_stack	*stack;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -102,8 +99,8 @@ t_stack_node	*init_stack_from_str(char *str)
 
 int	main(int argc, char **argv)
 {
-	t_stack_node *a_stack;
-	t_stack_node *b_stack;
+	t_stack	*a_stack;
+	t_stack	*b_stack;
 
 	// Initialize stacks
 	a_stack = NULL;
@@ -112,7 +109,7 @@ int	main(int argc, char **argv)
 	// Handle no inputs
 	if (argc == 1 || (argc == 2 && *(argv[1]) == '\0'))
 	{
-		printf("No arguments!\n");
+		ft_printf("No arguments!\n");
 		return (0);
 	}
 
@@ -126,9 +123,8 @@ int	main(int argc, char **argv)
 
 	while (a_stack)
 	{
-		printf("node value : %i\n", a_stack->value);
+		ft_printf("node value : %i\n", a_stack->value);
 		a_stack = a_stack->next;
 	}
-
-	printf("Done\n");
+	ft_printf("Done\n");
 }

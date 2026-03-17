@@ -6,49 +6,55 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/15 01:54:42 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/17 16:37:53 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	= push_swap
+NAME 		= push_swap
 
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
+CC			= cc
+CFLAGS		= -Wall -Werror -Wextra
 
-LIBS	= libft
-ARCHIVES = $(foreach lib, $(LIBS), ./$(lib)/$(lib).a)
+LIBS		= ft
+LIBS_DIR	= $(foreach lib, $(LIBS), lib$(lib))
+ARCHIVES 	= $(foreach lib, $(LIBS_DIR), ./$(lib)/$(lib).a)
+LINKS		= $(foreach lib, $(LIBS),-L lib$(lib) -l $(lib))
 
-CFILES 	= push_swap.c
-OBJECTS	= $(CFILES:.c=.o)
+INC			= $(foreach lib, $(LIBS_DIR),-I $(lib)/include)
+INC			+= -I stack/include
 
-$(NAME): $(OBJECTS)
+CFILES 		= 	push_swap.c				\
+				./stack/src/push.c		\
+				./stack/src/rotate.c	\
+				./stack/src/swap.c		\
+				./stack/src/utils1.c	\
+				./stack/src/utils2.c	\
+
+OBJECTS		= $(CFILES:.c=.o)
+
+$(NAME): $(ARCHIVES) $(OBJECTS)
+	@echo ""
+	$(CC) $(CFLAGS) $(INC) $(CFILES) $(LINKS)
+	@echo "\n-> $(NAME) : OK"
+	./a.out -45 2 27 49 62 35 -65 -20 -16 4 7 2
+
+$(ARCHIVES):
+	@echo "\nBuilding required libraries :"
+	@$(foreach lib, $(LIBS_DIR), $(MAKE) -s -C ./$(lib) all;)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 
 all: $(NAME)
 
 clean:
-	rm -rf $(OBJECTS)
-	$(foreach lib, $(LIBS), $(MAKE) -C ./$(lib) clean;)
+	@rm -vf $(OBJECTS)
+	@$(foreach lib, $(LIBS_DIR), $(MAKE) -s -C ./$(lib) clean;)
 
 fclean:
-	rm -rf $(NAME) $(OBJECTS)
-	$(foreach lib, $(LIBS), $(MAKE) -C ./$(lib) fclean;)
+	@rm -vf $(NAME) $(OBJECTS)
+	@$(foreach lib, $(LIBS_DIR), $(MAKE) -s -C ./$(lib) fclean;)
 
 re: fclean all
-
-test:
-	echo "JE SUIS ICI"
-	echo $(ARCHIVES)
-
-test2: $(CFILES) $(ARC11HS)
-	$(CC) $(CFLAGS) $(CFILES) -L./libft -llibft.a
-	$(CC) $(CFLAGS) -I $(ARCHS) $(CFILES)
-	./a.out 56 42 27 -51 -7 12 24 -16 35 0
-	$(CC) $(CFLAGS) $(CFILES) $(LIBS_PATH) $(ARCHIVES)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(LIBS) -c $^ -o $@
-
-./%/%.a:
-	make -C $* all
 
 .PHONY: all clean fclean re

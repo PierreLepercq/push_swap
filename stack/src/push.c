@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:59:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/10 19:07:17 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/17 16:27:02 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	push(t_stack **src, t_stack **dst)
 {
-	int		id;
 	t_stack	*node;
 
 	if (*src == NULL)
