@@ -6,11 +6,12 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/17 15:34:49 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/17 18:01:16 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= libft.a
+NAME		= libft
+ARCHIVE		= $(addsuffix .a, $(NAME))
 
 CC 			= cc
 CFLAGS		= -Wall -Wextra -Werror
@@ -33,16 +34,18 @@ OBJECTS		= $(CFILES:.c=.o)
 INC			= -I include
 
 $(NAME): $(OBJECTS)
-	@ar -rcs $@ $^
+	@ar -rcs $(ARCHIVE) $^
 	@echo " - $(NAME) : OK"
 
 all: $(NAME)
 
 clean:
+	@echo "\nfrom $(NAME)"
 	@rm -vf $(OBJECTS)
 
 fclean:
-	@rm -vf $(NAME) $(OBJECTS)
+	@echo "\nfrom $(NAME)"
+	@rm -vf $(ARCHIVE) $(OBJECTS)
 
 re: fclean all
 

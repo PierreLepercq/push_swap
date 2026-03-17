@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 15:31:37 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:39:16 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int		w_str(char *str);
 int		w_nbr_base(long nb, char *base);
 int		w_unbr_base(unsigned long nb, char *base);
 int		w_ptr_adress(unsigned long ptr);
-
 
 #endif

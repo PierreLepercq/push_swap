@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 15:56:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/17 18:40:51 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include "libft.h"
-
-typedef struct s_stack
-{
-	int				id;
-	int				value;
-	int				cost;
-	struct s_stack	*prev;
-	struct s_stack	*next;
-}	t_stack;
+# include "stack.h"
 
 /*	MAIN FUNCTIONS	*/
-
 
 #endif

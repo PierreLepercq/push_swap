@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 16:36:25 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/17 19:09:37 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,19 @@ t_stack	*new_stack_node(int id, int value, t_stack *prev)
 	return (new);
 }
 
-void	delete_stack(t_stack *node)
+void	free_stack(t_stack **stack)
 {
-	t_stack	*prev;
-	t_stack	*last;
+	t_stack	*node;
+	t_stack	*next;
 
-	if (node == NULL)
+	if (stack == NULL || *stack == NULL)
 		return ;
-	last = node;
-	while (last->next != NULL)
-		last = last->next;
-	while (last->prev != NULL)
+	node = *stack;
+	while (node->next != NULL)
 	{
-		prev = last->prev;
-		free(last);
-		last = prev;
+		next = node->next;
+		free(node);
+		node = next;
 	}
 }
 
@@ -51,27 +49,27 @@ t_stack	*init_stack(char **inputs, int len)
 	int		i;
 	int		value;
 	t_stack	*node;
-	t_stack	*prev_node;
+	t_stack	*prev;
 
 	id = 0;
-	prev_node = NULL;
+	node = NULL;
+	prev = NULL;
 	while (id < len)
 	{
 		i = 0;
 		while ((inputs[id])[i] != '\0')
 		{
-			//ft_printf("test %s \n", ft_strchr("0123456789-+", inputs[id][i++]));
-			if (ft_strchr(" 0123456789-+", inputs[id][i++]) == NULL)
-				return (delete_stack(prev_node), NULL);
+			if (ft_strchr("0123456789-+", inputs[id][i++]) == NULL)
+				return (free_stack(&prev), NULL);
 		}
 		value = ft_atoi(inputs[id]);
-		node = new_stack_node(id, value, prev_node);
-		prev_node = node;
+		node = new_stack_node(id, value, prev);
+		prev = node;
 		id++;
 	}
-	while (prev_node->prev)
-		prev_node = prev_node->prev;
-	return (prev_node);
+	while (node->prev != NULL)
+		node = node->prev;
+	return (node);
 }
 
 t_stack	*init_stack_from_str(char *str)
@@ -97,34 +95,49 @@ t_stack	*init_stack_from_str(char *str)
 	return (stack);
 }
 
+int	has_duplicates(t_stack **stack)
+{
+	t_stack	*node;
+	t_stack	*other;
+
+	node = *stack;
+	while (node->next != NULL)
+	{
+		other = node->next;
+		while (other->next != NULL)
+		{
+			if (node->value == other->value)
+			{
+				ft_printf("=> %i", node->value);
+				return (1);
+			}
+			other = other->next;
+		}
+		node = node->next;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	t_stack	*a_stack;
-	t_stack	*b_stack;
+	t_stack	**a_stack;
+	t_stack	**b_stack;
 
-	// Initialize stacks
-	a_stack = NULL;
-	(void)b_stack;// = NULL;
-
-	// Handle no inputs
+	a_stack = malloc(sizeof(t_stack **));
+	b_stack = malloc(sizeof(t_stack **));
+	if (!a_stack || !b_stack)
+		return (free_stack(a_stack), free_stack(b_stack), 0);
 	if (argc == 1 || (argc == 2 && *(argv[1]) == '\0'))
-	{
-		ft_printf("No arguments!\n");
 		return (0);
-	}
-
-	// Init stack a
 	if (argc == 2)
-		a_stack = init_stack_from_str(argv[1]);
+		*a_stack = init_stack_from_str(argv[1]);
 	else
-		a_stack = init_stack(argv + 1, argc - 1);
-	if (a_stack == NULL)
-		return (write(1, "error\n", 6));
-
-	while (a_stack)
-	{
-		ft_printf("node value : %i\n", a_stack->value);
-		a_stack = a_stack->next;
-	}
-	ft_printf("Done\n");
+		*a_stack = init_stack(argv + 1, argc - 1);
+	if (*a_stack == NULL)
+		return (free_stack(a_stack), free_stack(b_stack), ft_printf("error\n"));
+	ft_printf("result duplicate : %i", has_duplicates(a_stack));
+	//if (has_duplicates(a_stack))
+	//	return (free_stack(a_stack), free_stack(b_stack), ft_printf("error\n"));
+	//sort_algorithm(a_stack, b_stack);
+	return (free_stack(a_stack), free_stack(b_stack), 0);
 }
