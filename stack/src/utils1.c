@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:11:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 16:26:07 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/18 16:03:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,32 @@ t_stack	*stack_last(t_stack *stack)
 	return (stack);
 }
 
-void	stack_iter(t_stack *stack, void (*f)(void *))
+void	stack_iter(t_stack **stack, void (*f)(void *))
 {
-	if (!stack)
+	t_stack	*node;
+
+	if (*stack == NULL)
 		return ;
-	while (stack->next)
+	node = *stack;
+	while (node != NULL)
 	{
-		f(stack);
-		stack = stack->next;
+		f(node);
+		node = node->next;
 	}
-	f(stack);
 }
 
-void	stack_index(t_stack *stack)
+void	stack_index(t_stack **stack)
 {
 	int		id;
-	t_stack	*current;
+	t_stack	*node;
 
-	if (!stack)
+	if (*stack == NULL)
 		return ;
 	id = 0;
-	current = stack;
-	while (current)
+	node = *stack;
+	while (node != NULL)
 	{
-		current->id = id++;
-		current = current->next;
+		node->id = id++;
+		node = node->next;
 	}
 }

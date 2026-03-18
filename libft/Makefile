@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/17 18:01:16 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/18 15:03:00 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ CFLAGS		= -Wall -Wextra -Werror
 FUNCTIONS 	= 	ft_atoi 		\
 				ft_split 		\
 				ft_strchr 		\
+				ft_strlen		\
+				ft_strncmp		\
 				ft_substr 		\
 				ft_printf		\
 				check_base		\

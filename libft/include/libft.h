@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 18:39:16 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/18 15:02:47 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 int		ft_atoi(const char *s);
 char	**ft_split(char *str, char *charset);
 char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+int	    ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(const char *str, int start, int len);
 
 /*	FT_PRINTF	*/
