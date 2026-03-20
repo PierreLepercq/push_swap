@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:59:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 16:27:02 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/20 17:59:53 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	push(t_stack **src, t_stack **dst)
 
 	if (*src == NULL)
 		return ;
-	node = *src;
+	node = stack_first(*src);
 	*src = node->next;
 	node->next->prev = NULL;
-	stack_index(*src);
+	node->next = NULL;
+	node->id = 0;
+	stack_index(src);
 	stack_add_front(dst, node);
 }

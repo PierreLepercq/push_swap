@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/18 12:57:02 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/20 17:22:42 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(ARCHIVES) $(OBJECTS)
 	@echo ""
 	$(CC) $(CFLAGS) $(INC) $(CFILES) $(LINKS)
 	@echo "\n-> $(NAME) : OK"
-	./a.out -45 2 -45
+	./a.out -45 2 7 27 58 62 34 15 01 56
 
 $(ARCHIVES):
 	@echo "\nBuilding required libraries :"

@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:11:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/18 16:03:17 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/20 15:32:01 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_stack	*stack_first(t_stack *stack)
 
 t_stack	*stack_last(t_stack *stack)
 {
-	if (!stack)
+	if (stack == NULL)
 		return (NULL);
 	while (stack->next)
 		stack = stack->next;

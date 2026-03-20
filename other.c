@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include <limits.h>
+
 t_stack	*new_stack_node(int id, int value, t_stack *prev)
 {
 	t_stack	*new;
@@ -29,42 +32,14 @@ int	check_atoi(const char *s)
 	while (s[i + len] != '\0')
 	{
 		if (s[i + len] < '0' && s[i] > '9')
-			return (NULL);
+			return (0);
 		len++;
 	}
 	if (len > 10)
-		return (NULL);
-	if (len == 10 && sign == '+' && ft_strncmp(s + i, "2147483647", 10) != 0)
-		return (NULL);
-	if (len == 10 && sign == '-' && ft_strncmp(s + i, "2147483648", 10) != 0)
-		return (NULL);
-	return (ft_atoi(s));
-}
-
-int	ft_atoi_safe(const char *s)
-{
-	int		i;
-	long	nbr;
-	int		sign;
-
-	i = 0;
-	nbr = 0;
-	sign = 1;
-	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
-		i++;
-	if (s[i] == '+' || s[i] == '-')
-	{
-		if (s[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (s[i] >= '0' && s[i] <= '9')
-	{
-		nbr *= 10;
-		nbr += sign * (s[i] - '0');
-		if (nbr < INT_MIN || nbr > INT_MAX)
-			return (NULL);
-		i++;
-	}
-	return (nbr);
+		return (0);
+	if (len == 10 && sign == '+' && ft_strncmp(s + i, "2147483647", 10) > 0)
+		return (0);
+	if (len == 10 && sign == '-' && ft_strncmp(s + i, "2147483648", 10) > 0)
+		return (0);
+	return (1);
 }
