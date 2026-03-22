@@ -6,26 +6,14 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 16:31:37 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/22 20:51:48 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	view_stack(t_stack **stack, const char *label)
-{
-	t_stack	*node;
-
-	ft_printf("\n>      %s      <\n", label);
-	if (*stack == NULL)
-		ft_printf("empty\n");
-	node = *stack;
-	while (node != NULL)
-	{
-		ft_printf("value[%i] : %i\n", node->id, node->value);
-		node = node->next;
-	}
-}
+#define STR_INT_MAX "2147483647"
+#define STR_INT_MIN	"-2147483648"
 
 int	check_atoi(const char *s)
 {
@@ -48,9 +36,9 @@ int	check_atoi(const char *s)
 	}
 	if (len > 10)
 		return (0);
-	if (len == 10 && sign == '+' && ft_strncmp(s + i, "2147483647", 10) > 0)
+	if (len == 10 && sign == '+' && ft_strncmp(s + i, STR_INT_MAX, 10) > 0)
 		return (0);
-	if (len == 10 && sign == '-' && ft_strncmp(s + i, "2147483648", 10) > 0)
+	if (len == 10 && sign == '-' && ft_strncmp(s + i, &STR_INT_MIN[1], 10) > 0)
 		return (0);
 	return (1);
 }
@@ -104,39 +92,6 @@ t_stack	**create_stack_from_str(char *str)
 	return (stack);
 }
 
-void	sort_algorithm(t_stack **a_stack, t_stack **b_stack)
-{
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-
-	push(a_stack, b_stack);
-	push(a_stack, b_stack);
-
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-
-	rotate(b_stack);
-
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-
-	rrotate(b_stack);
-
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-
-	swap(b_stack);
-
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-
-	push(b_stack, a_stack);
-	push(b_stack, a_stack);
-
-	view_stack(a_stack, "stack A");
-	view_stack(b_stack, "stack B");
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	**a_stack;
@@ -147,16 +102,16 @@ int	main(int argc, char **argv)
 	if (!a_stack || !b_stack)
 		return (stack_free(a_stack), stack_free(b_stack), 0);
 	if (argc == 1 || (argc == 2 && *(argv[1]) == '\0'))
-		return (0);
+		return (ft_printf("error\n"), 0);
 	if (argc == 2)
 		a_stack = create_stack_from_str(argv[1]);
 	else
 		a_stack = create_stack(&argv[1], argc - 1);
-	if (*a_stack == NULL || has_duplicates(a_stack))
+	if (has_duplicates(a_stack))
 	{
 		ft_printf("error\n");
 		return (stack_free(a_stack), stack_free(b_stack), 0);
 	}
-	sort_algorithm(a_stack, b_stack);
+	turk_algorithm(a_stack, b_stack);
 	return (stack_free(a_stack), stack_free(b_stack), 0);
 }

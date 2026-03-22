@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   sort_algorithms.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 18:21:21 by plepercq         ###   ########.fr       */
+/*   Created: 2026/03/22 17:25:15 by plepercq          #+#    #+#             */
+/*   Updated: 2026/03/22 18:26:19 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef SORT_ALGORITHMS_H
+# define SORT_ALGORITHMS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,8 +19,7 @@
 # include <limits.h>
 # include "libft.h"
 # include "stack.h"
-# include "sort_algorithms.h"
 
-/*	MAIN FUNCTIONS	*/
+void	turk_algorithm(t_stack **a_stack, t_stack **b_stack);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/20 17:22:42 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/22 18:42:20 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,16 @@ LINKS		= $(foreach lib, $(LIBS),-L lib$(lib) -l $(lib))
 
 INC			= $(foreach lib, $(LIBS_DIR),-I $(lib)/include)
 INC			+= -I stack/include
+INC			+= -I sort_algorithms/include
 
-CFILES 		= 	push_swap.c				\
-				./stack/src/push.c		\
-				./stack/src/rotate.c	\
-				./stack/src/swap.c		\
-				./stack/src/utils1.c	\
-				./stack/src/utils2.c	\
+CFILES 		= 	push_swap.c								\
+				./stack/src/push.c						\
+				./stack/src/rotate.c					\
+				./stack/src/swap.c						\
+				./stack/src/utils1.c					\
+				./stack/src/utils2.c					\
+				./stack/src/utils3.c					\
+				./sort_algorithms/src/turk_algorithm.c	\
 
 OBJECTS		= $(CFILES:.c=.o)
 

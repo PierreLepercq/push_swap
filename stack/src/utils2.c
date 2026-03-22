@@ -6,11 +6,27 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:36:43 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 16:05:45 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/22 18:55:30 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
+
+void	stack_index(t_stack **stack)
+{
+	int		id;
+	t_stack	*node;
+
+	if (*stack == NULL)
+		return ;
+	id = 0;
+	node = *stack;
+	while (node != NULL)
+	{
+		node->id = id++;
+		node = node->next;
+	}
+}
 
 void	stack_add_front(t_stack **stack, t_stack *new)
 {
