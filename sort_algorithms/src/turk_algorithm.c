@@ -6,13 +6,13 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 20:25:04 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/23 18:26:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	ascent_cost(t_stack	*node)
+int	get_ascent_cost(t_stack	*node)
 {
 	int	cost;
 	int	len;
@@ -26,35 +26,26 @@ int	ascent_cost(t_stack	*node)
 	return (cost);
 }
 
-void	evaluate_cost(t_stack **a_stack, t_stack **b_stack)
+t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
 {
-	int		len_a;
-	int		len_b;
-	t_stack	*node;
+	t_stack	*min;
 	t_stack	*target;
 
-	if (*a_stack == NULL || *b_stack == NULL)
-		return ;
-	node = *a_stack;
-	while (node != NULL)
+	min = stack_min(stack);
+	if (min->value > node->value)
+		return (stack_max(stack));
+	target = min;
+	while (target->next != min)
 	{
-		node->cost = ascent_cost(node);
-		target = stack_min(*b_stack);
-		if (target->value > node->value)
-			target = stack_max(*b_stack);
-		else
-		{
-			while (target->next != NULL && target->next->value < node->value)
-				target = target->next;
-		}
-		node->cost += ascent_cost(target);
+		if (target->next->value > node->value)
+			break ;
+		target = target->next;
 	}
+	return (target);
 }
 
-void	get_lowest_cost_node(t_stack **a_stack, t_stack **b_stack)
+t_stack	*evaluate_cost(t_stack **a_stack, t_stack **b_stack)
 {
-	int		cost;
-	int		lowest;
 	t_stack	*node;
 	t_stack	*target;
 	t_stack	*cheapest;
@@ -62,14 +53,32 @@ void	get_lowest_cost_node(t_stack **a_stack, t_stack **b_stack)
 	if (*a_stack == NULL || *b_stack == NULL)
 		return ;
 	node = *a_stack;
-	cost = 0;
-	if (node->id * 2 < stack_len(a_stack))
-		cost += node->id;
-	else
-		cost += stack_len(a_stack) - node->id;
-	target = *b_stack;
+	cheapest = node;
+	while (node)
+	{
+		node->target = get_closest_smaller_target(node, b_stack);
+		node->cost = get_ascent_cost(node);
+		node->cost += get_ascent_cost(node->target);
+		if (node->cost < cheapest->cost)
+			cheapest = node;
+		node = node->next;
+		if (node == a_stack)
+			break ;
+	}
+	return (cheapest);
+}
 
+void	move_to_head()
 
+void	move_cheapest(t_stack **a_stack, t_stack **b_stack)
+{
+	t_stack	*node;
+	t_stack	*cheapest;
+
+	if (*a_stack == NULL || *b_stack == NULL)
+		return ;
+	cheapest = evaluate_cost(a_stack, b_stack);
+	
 }
 
 void	turk_algorithm(t_stack **a_stack, t_stack **b_stack)
@@ -81,7 +90,11 @@ void	turk_algorithm(t_stack **a_stack, t_stack **b_stack)
 			push(a_stack, b_stack);
 			continue ;
 		}
-		evaluate_cost(a_stack, b_stack);
+		move_cheapest(a_stack, b_stack);
 	}
-	evaluate_cost(a_stack, b_stack);
+	// while in b stack, get lowest, move and reevaluate
+	while (stack_len(b_stack) > 0)
+	{
+
+	}
 }

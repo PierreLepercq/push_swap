@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:11:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 18:57:19 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/23 15:23:01 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,16 @@ t_stack	*stack_new(int value)
 	return (new);
 }
 
-t_stack	*stack_first(t_stack *stack)
-{
-	if (!stack)
-		return (NULL);
-	while (stack->prev)
-		stack = stack->prev;
-	return (stack);
-}
-
-t_stack	*stack_last(t_stack *stack)
-{
-	if (stack == NULL)
-		return (NULL);
-	while (stack->next)
-		stack = stack->next;
-	return (stack);
-}
-
 int	stack_len(t_stack **stack)
 {
 	int		i;
 	t_stack	*node;
 
-	i = 0;
 	if (*stack == NULL)
-		return (i);
-	node = stack_first(*stack);
-	while (node != NULL)
+		return (0);
+	i = 1;
+	node = (*stack)->next;
+	while (node != *stack)
 	{
 		node = node->next;
 		i++;
@@ -67,8 +49,9 @@ void	stack_iter(t_stack **stack, void (*f)(void *))
 
 	if (*stack == NULL)
 		return ;
-	node = *stack;
-	while (node != NULL)
+	f(*stack);
+	node = (*stack)->next;
+	while (node != *stack)
 	{
 		f(node);
 		node = node->next;

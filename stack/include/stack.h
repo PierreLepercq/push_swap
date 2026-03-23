@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:09:57 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 19:52:47 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:34:49 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@ typedef struct s_stack
 {
 	int				id;
 	int				value;
-	struct s_stack	target;
 	int				cost;
 	struct s_stack	*prev;
 	struct s_stack	*next;
+	struct s_stack	*target;
 }	t_stack;
 
 /*  UTILITIES   */
 t_stack	*stack_new(int value);
-t_stack	*stack_first(t_stack *stack);
-t_stack	*stack_last(t_stack *stack);
 int		stack_len(t_stack **stack);
 void	stack_iter(t_stack **stack, void (*f)(void *));
 void	stack_index(t_stack **stack);

@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 18:42:33 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 19:45:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:11:03 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 t_stack	*stack_min(t_stack **stack)
 {
-	int		value;
 	t_stack	*node;
 	t_stack	*other;
 
@@ -22,7 +21,7 @@ t_stack	*stack_min(t_stack **stack)
 		return (NULL);
 	node = *stack;
 	other = node->next;
-	while (other != NULL)
+	while (other != *stack)
 	{
 		if (other->value < node->value)
 			node = other;
@@ -33,7 +32,6 @@ t_stack	*stack_min(t_stack **stack)
 
 t_stack	*stack_max(t_stack **stack)
 {
-	int		value;
 	t_stack	*node;
 	t_stack	*other;
 
@@ -41,7 +39,7 @@ t_stack	*stack_max(t_stack **stack)
 		return (NULL);
 	node = *stack;
 	other = node->next;
-	while (other != NULL)
+	while (other != *stack)
 	{
 		if (other->value > node->value)
 			node = other;
@@ -58,9 +56,11 @@ void	stack_print(t_stack **stack, const char *label)
 	if (*stack == NULL)
 		ft_printf("empty\n");
 	node = *stack;
-	while (node != NULL)
+	while (node)
 	{
 		ft_printf("value[%i] : %i\n", node->id, node->value);
 		node = node->next;
+		if (node == *stack)
+			break ;
 	}
 }

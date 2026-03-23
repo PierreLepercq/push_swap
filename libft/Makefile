@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/18 15:03:00 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/23 15:55:40 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,11 @@ $(NAME): $(OBJECTS)
 all: $(NAME)
 
 clean:
-	@echo "\nfrom $(NAME)"
+	@echo "\n> from $(NAME)"
 	@rm -vf $(OBJECTS)
 
 fclean:
-	@echo "\nfrom $(NAME)"
+	@echo "\n> from $(NAME)"
 	@rm -vf $(ARCHIVE) $(OBJECTS)
 
 re: fclean all

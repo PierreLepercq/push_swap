@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:36:43 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/22 18:55:30 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/23 16:21:03 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	stack_index(t_stack **stack)
 		return ;
 	id = 0;
 	node = *stack;
-	while (node != NULL)
+	node->id = id++;
+	node = node->next;
+	while (node != *stack)
 	{
 		node->id = id++;
 		node = node->next;
@@ -32,10 +34,17 @@ void	stack_add_front(t_stack **stack, t_stack *new)
 {
 	if (new == NULL)
 		return ;
-	if (*stack)
+	if (*stack != NULL)
 	{
 		new->next = *stack;
+		new->prev = (*stack)->prev;
+		(*stack)->prev->next = new;
 		(*stack)->prev = new;
+	}
+	else
+	{
+		new->next = new;
+		new->prev = new;
 	}
 	*stack = new;
 	stack_index(stack);
@@ -43,19 +52,22 @@ void	stack_add_front(t_stack **stack, t_stack *new)
 
 void	stack_add_back(t_stack **stack, t_stack *new)
 {
-	t_stack	*last;
-
 	if (new == NULL)
 		return ;
-	last = stack_last(*stack);
-	if (last != NULL)
+	if (*stack == NULL)
 	{
-		last->next = new;
-		new->prev = last;
-		new->id = last->id + 1;
+		*stack = new;
+		new->prev = new;
+		new->next = new;
 	}
 	else
-		*stack = new;
+	{
+		new->next = *stack;
+		new->prev = (*stack)->prev;
+		(*stack)->prev->next = new;
+		(*stack)->prev = new;
+	}
+	stack_index(stack);
 }
 
 void	stack_free(t_stack **stack)
@@ -65,13 +77,14 @@ void	stack_free(t_stack **stack)
 
 	if (*stack == NULL)
 		return ;
-	node = *stack;
-	while (node != NULL)
+	node = (*stack)->next;
+	while (node != *stack)
 	{
 		next = node->next;
 		free(node);
 		node = next;
 	}
+	free(node);
 }
 
 int	has_duplicates(t_stack **stack)
@@ -80,10 +93,10 @@ int	has_duplicates(t_stack **stack)
 	t_stack	*other;
 
 	node = *stack;
-	while (node->next != NULL)
+	while (node->next != *stack)
 	{
 		other = node->next;
-		while (other != NULL)
+		while (other != *stack)
 		{
 			if (node->value == other->value)
 				return (1);

@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/22 18:42:20 by plepercq         ###   ########.fr        #
+#    Updated: 2026/03/23 15:50:18 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CFILES 		= 	push_swap.c								\
 				./stack/src/utils1.c					\
 				./stack/src/utils2.c					\
 				./stack/src/utils3.c					\
+				./sort_algorithms/src/test_algorithm.c	\
 				./sort_algorithms/src/turk_algorithm.c	\
 
 OBJECTS		= $(CFILES:.c=.o)
