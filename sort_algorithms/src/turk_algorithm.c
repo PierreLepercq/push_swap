@@ -6,24 +6,30 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/23 18:26:38 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/24 18:26:09 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	get_ascent_cost(t_stack	*node)
+int	abs(int value)
 {
-	int	cost;
-	int	len;
+	if (value < 0)
+		return (-value);
+	return (value);
+}
 
-	cost = 0;
-	len = stack_len(&node);
+int	get_rotations_count(t_stack **stack, t_stack *node)
+{
+	int	len;
+	int	count;
+
+	len = stack_len(stack);
 	if (node->id * 2 < len)
-		cost += node->id;
+		count = -1 * node->id;
 	else
-		cost += len - node->id;
-	return (cost);
+		count = len - node->id;
+	return (count);
 }
 
 t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
@@ -35,66 +41,112 @@ t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
 	if (min->value > node->value)
 		return (stack_max(stack));
 	target = min;
-	while (target->next != min)
+	while (target->prev != min)
 	{
-		if (target->next->value > node->value)
+		if (target->prev->value > node->value)
 			break ;
-		target = target->next;
+		target = target->prev;
 	}
 	return (target);
 }
 
-t_stack	*evaluate_cost(t_stack **a_stack, t_stack **b_stack)
+t_stack	*evaluate_cost(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*node;
 	t_stack	*target;
 	t_stack	*cheapest;
 
-	if (*a_stack == NULL || *b_stack == NULL)
-		return ;
-	node = *a_stack;
+	(void)node;
+	(void)target;
+
+	if (*stack_a == NULL || *stack_b == NULL)
+		return (NULL);
+	node = *stack_a;
 	cheapest = node;
 	while (node)
 	{
-		node->target = get_closest_smaller_target(node, b_stack);
-		node->cost = get_ascent_cost(node);
-		node->cost += get_ascent_cost(node->target);
+		node->target = get_closest_smaller_target(node, stack_b);
+		node->cost = abs(get_rotations_count(stack_a, node));
+		node->cost += abs(get_rotations_count(stack_a, node->target));
 		if (node->cost < cheapest->cost)
 			cheapest = node;
 		node = node->next;
-		if (node == a_stack)
+		if (node == *stack_a)
 			break ;
 	}
 	return (cheapest);
 }
 
-void	move_to_head()
+//void	move_to_head(t_stack *node)
+//{
+//	int	cost;
+//	int	len;
+//
+//	cost = 0;
+//	len = stack_len(&node);
+//	if (node->id * 2 < len)
+//		cost += node->id;
+//	else
+//		cost += len - node->id;
+//	return (cost);
+//}
 
-void	move_cheapest(t_stack **a_stack, t_stack **b_stack)
+void	mode_node_to_stack_head(t_stack *node, t_stack **stack)
 {
-	t_stack	*node;
-	t_stack	*cheapest;
+	int	i;
+	int	step;
+	int	rot_count;
 
-	if (*a_stack == NULL || *b_stack == NULL)
+	rot_count = get_rotations_count(stack, node);
+	if (rot_count == 0)
 		return ;
-	cheapest = evaluate_cost(a_stack, b_stack);
-	
+	i = 0;
+	step = 1;
+	if (rot_count < 0)
+		step = -1;
+	while (i != rot_count)
+	{
+		if (step == 1)
+			rrotate(stack);
+		else
+			rotate(stack);
+		i += step;
+	}
 }
 
-void	turk_algorithm(t_stack **a_stack, t_stack **b_stack)
+void	move_cheapest(t_stack **stack_a, t_stack **stack_b)
 {
-	while (stack_len(a_stack) > 3)
+	t_stack	*cheapest;
+
+	if (*stack_a == NULL || *stack_b == NULL)
+		return ;
+	cheapest = evaluate_cost(stack_a, stack_b);
+	mode_node_to_stack_head(cheapest, stack_a);
+	mode_node_to_stack_head(cheapest->target, stack_b);
+	push(stack_a, stack_b);
+}
+
+void	turk_algorithm(t_stack **stack_a, t_stack **stack_b)
+{
+	while (stack_len(stack_a) > 3)
 	{
-		if (stack_len(b_stack) < 2)
+		stack_print(stack_a, "stack A");
+		stack_print(stack_b, "stack B");
+		if (stack_len(stack_b) < 2)
 		{
-			push(a_stack, b_stack);
+			push(stack_a, stack_b);
 			continue ;
 		}
-		move_cheapest(a_stack, b_stack);
+		move_cheapest(stack_a, stack_b);
 	}
-	// while in b stack, get lowest, move and reevaluate
-	while (stack_len(b_stack) > 0)
-	{
+	stack_print(stack_a, "stack A");
+	stack_print(stack_b, "stack B");
 
-	}
+	if ((*stack_a)->value < (*stack_a)->next->value)
+
+	// while in b stack, get lowest, move and reevaluate
+	//while (stack_len(stack_b) > 0)
+	//{
+	//
+	//}
 }
