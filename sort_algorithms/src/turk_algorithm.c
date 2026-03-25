@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/24 18:26:09 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:01:15 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,28 @@ int	get_rotations_count(t_stack **stack, t_stack *node)
 
 t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
 {
-	t_stack	*min;
+	t_stack	*cursor;
 	t_stack	*target;
 
-	min = stack_min(stack);
-	if (min->value > node->value)
+	if (stack_min(stack)->value > node->value)
 		return (stack_max(stack));
-	target = min;
-	while (target->prev != min)
+	target = stack_min(stack);
+	cursor = *stack;
+	while (cursor->next != *stack)
 	{
-		if (target->prev->value > node->value)
-			break ;
-		target = target->prev;
+		if (cursor->value > target->value && cursor->value < node->value)
+			target = cursor;
+		cursor = cursor->next;
 	}
+	if (cursor->value > target->value && cursor->value < node->value)
+		target = cursor;
 	return (target);
 }
 
 t_stack	*evaluate_cost(t_stack **stack_a, t_stack **stack_b)
 {
 	t_stack	*node;
-	t_stack	*target;
 	t_stack	*cheapest;
-
-	(void)node;
-	(void)target;
 
 	if (*stack_a == NULL || *stack_b == NULL)
 		return (NULL);
@@ -74,6 +72,9 @@ t_stack	*evaluate_cost(t_stack **stack_a, t_stack **stack_b)
 		if (node == *stack_a)
 			break ;
 	}
+	ft_printf("\n----------------------------");
+	ft_printf("\ncheapest : %i\n", cheapest->value);
+	ft_printf("target : %i\n", cheapest->target->value);
 	return (cheapest);
 }
 
@@ -114,16 +115,33 @@ void	mode_node_to_stack_head(t_stack *node, t_stack **stack)
 	}
 }
 
-void	move_cheapest(t_stack **stack_a, t_stack **stack_b)
+void	move_cheapest(t_stack **src, t_stack **dst, int descend)
 {
 	t_stack	*cheapest;
 
-	if (*stack_a == NULL || *stack_b == NULL)
+	(void)descend;
+
+	if (*src == NULL || *src == NULL)
 		return ;
-	cheapest = evaluate_cost(stack_a, stack_b);
-	mode_node_to_stack_head(cheapest, stack_a);
-	mode_node_to_stack_head(cheapest->target, stack_b);
-	push(stack_a, stack_b);
+	cheapest = evaluate_cost(src, dst);
+	mode_node_to_stack_head(cheapest, src);
+	mode_node_to_stack_head(cheapest->target, dst);
+	if (descend == 1)
+		rotate(dst);
+	push(src, dst);
+}
+
+void	sort_three(t_stack **stack)
+{
+	t_stack	*max;
+
+	max = stack_max(stack);
+	if (max->id == 0)
+		rotate(stack);
+	if (max->id == 1)
+		rrotate(stack);
+	if ((*stack)->value > (*stack)->next->value)
+		swap(stack);
 }
 
 void	turk_algorithm(t_stack **stack_a, t_stack **stack_b)
@@ -137,16 +155,26 @@ void	turk_algorithm(t_stack **stack_a, t_stack **stack_b)
 			push(stack_a, stack_b);
 			continue ;
 		}
-		move_cheapest(stack_a, stack_b);
+		move_cheapest(stack_a, stack_b, 0);
 	}
 	stack_print(stack_a, "stack A");
 	stack_print(stack_b, "stack B");
 
-	if ((*stack_a)->value < (*stack_a)->next->value)
+	sort_three(stack_a);
 
-	// while in b stack, get lowest, move and reevaluate
-	//while (stack_len(stack_b) > 0)
-	//{
-	//
-	//}
+	stack_print(stack_a, "stack A");
+	stack_print(stack_b, "stack B");
+
+	while (stack_len(stack_b) > 0)
+	{
+		evaluate_cost(stack_b, stack_a);
+		move_cheapest(stack_b, stack_a, 1);
+		stack_print(stack_a, "stack A");
+		stack_print(stack_b, "stack B");
+	}
+
+	mode_node_to_stack_head(stack_min(stack_a), stack_a);
+
+	stack_print(stack_a, "stack A");
+	stack_print(stack_b, "stack B");
 }

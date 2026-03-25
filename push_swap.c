@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/24 17:13:00 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/25 16:25:02 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	check_atoi(const char *s)
 			return (0);
 		len++;
 	}
+	// TODO penser a voir plus si nbr commence par 00000000000001
 	if (len > 10)
 		return (0);
 	if (len == 10 && sign == '+' && ft_strncmp(s + i, STR_INT_MAX, 10) > 0)
@@ -92,7 +93,7 @@ int	main(int argc, char **argv)
 	t_stack		**stack_a;
 	t_stack		**stack_b;
 
-	if (argc == 1 || (argc == 2 && *(argv[1]) == '\0'))
+	if (argc == 1)
 		return (ft_printf("error : number arguments\n"), 0);
 	stack_a = malloc(sizeof(t_stack *));
 	stack_b = malloc(sizeof(t_stack *));
@@ -100,6 +101,7 @@ int	main(int argc, char **argv)
 		return (stack_free(stack_a), stack_free(stack_b), 0);
 	if (argc == 2)
 		stack_a = init_stack_from_str(stack_a, argv[1]);
+	// todo check if error in init stack (pour le momoent la stack est juste egale a null)
 	else
 		stack_a = init_stack(stack_a, &argv[1], argc - 1);
 	if (has_duplicates(stack_a))

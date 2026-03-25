@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:32:33 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/23 15:48:35 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/25 18:40:25 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	swap(t_stack **stack)
 	t_stack	*first;
 	t_stack	*second;
 
-	ft_printf("\n#####################");
-	ft_printf("\n#       SWAP        #");
-	ft_printf("\n#####################\n");
 	if (*stack == NULL)
 		return ;
 	first = *stack;
@@ -38,4 +35,23 @@ void	swap(t_stack **stack)
 	second->id = 0;
 	first->id = 1;
 	*stack = second;
+}
+
+void	sa(t_stacks *stacks)
+{
+	ft_printf("> Swap A");
+	swap(stacks->stack_a);
+}
+
+void	sb(t_stacks *stacks)
+{
+	ft_printf("> Swap B");
+	swap(stacks->stack_b);
+}
+
+void	ss(t_stacks *stacks)
+{
+	ft_printf("> Swap A & B");
+	swap(stacks->stack_a);
+	swap(stacks->stack_b);
 }
