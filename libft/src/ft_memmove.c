@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/12 14:40:09 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/16 18:49:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+	int		index;
 
-/*	MAIN FUNCTIONS	*/
-
-#endif
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	i = 0;
+	while (++i <= n)
+	{
+		if (dest < src)
+			index = i - 1;
+		else
+			index = n - i;
+		ft_memcpy(dest + index, src + index, 1);
+	}
+	return (dest);
+}

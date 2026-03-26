@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/12 11:00:42 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/14 14:55:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+int	ft_isupper(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
+}
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+int	ft_islower(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	return (0);
+}
 
-/*	MAIN FUNCTIONS	*/
-
-#endif
+int	ft_isalpha(int c)
+{
+	if (ft_isupper(c) || ft_islower(c))
+		return (1);
+	return (0);
+}

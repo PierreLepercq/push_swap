@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/19 15:40:34 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/19 15:46:28 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
 
-/*	MAIN FUNCTIONS	*/
-
-#endif
+	if (!lst)
+		return (0);
+	i = 1;
+	while (lst->next)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}

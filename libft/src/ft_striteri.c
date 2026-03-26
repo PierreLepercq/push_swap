@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/18 17:01:51 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/18 17:06:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+{
+	unsigned int	i;
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
-
-/*	MAIN FUNCTIONS	*/
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
+}

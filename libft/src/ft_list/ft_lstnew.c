@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/19 15:18:12 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/20 13:57:36 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
 
-/*	MAIN FUNCTIONS	*/
-
-#endif
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}

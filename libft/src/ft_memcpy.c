@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/12 12:48:37 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/16 18:48:48 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+void	*ft_memcpy(void *dst, const void *src, size_t siz)
+{
+	size_t	i;
+	char	*c_src;
+	char	*c_dst;
 
-/*	MAIN FUNCTIONS	*/
-
-#endif
+	i = 0;
+	c_src = (char *)src;
+	c_dst = (char *)dst;
+	if (dst == NULL && src == NULL)
+		return (NULL);
+	while (i < siz)
+	{
+		c_dst[i] = c_src[i];
+		i++;
+	}
+	return (dst);
+}

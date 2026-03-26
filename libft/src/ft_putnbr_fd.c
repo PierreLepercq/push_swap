@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:03:16 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/18 17:18:44 by plepercq          #+#    #+#             */
+/*   Updated: 2025/11/18 17:32:34 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stddef.h>
-# include <limits.h>
-# include "libft.h"
-# include "stack.h"
-# include "sort_algorithms.h"
+void	writenbr(int n, int fd)
+{
+	char	cn;
 
-/*	MAIN FUNCTIONS	*/
+	if (n < -9 || n > 9)
+		writenbr(n / 10, fd);
+	if (n < 0)
+		cn = '0' - (n % 10);
+	else
+		cn = '0' + (n % 10);
+	write(fd, &cn, 1);
+}
 
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n < 0)
+	{
+		write(fd, "-", 1);
+		writenbr(n, fd);
+	}
+	else
+		writenbr(n, fd);
+}

@@ -6,13 +6,10 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 13:59:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/25 18:41:31 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:11:54 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO : remove libft
-
-#include "libft.h"
 #include "stack.h"
 
 void	push(t_stack **src, t_stack **dst)

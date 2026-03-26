@@ -6,15 +6,11 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:32:30 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/25 18:40:43 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/03/26 11:12:04 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO : remove libft
-
-#include "libft.h"
 #include "stack.h"
-#include <stdio.h>
 
 void	rotate(t_stack **stack)
 {
