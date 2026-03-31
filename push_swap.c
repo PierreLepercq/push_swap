@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <limits.h>
 
-#define STR_INT_MAX "2147483647"
-#define STR_INT_MIN "-2147483648"
+//#define STR_INT_MAX "2147483647"
+//#define STR_INT_MIN "-2147483648"
 
 int	check_atoi(const char *s)
 {
@@ -41,6 +42,33 @@ int	check_atoi(const char *s)
 		return (0);
 	if (len == 10 && sign == '-' && ft_strncmp(s + i, &STR_INT_MIN[1], 10) > 0)
 		return (0);
+	return (1);
+}
+
+int	check_atoi2(const char *s)
+{
+	int		i;
+	long	nbr;
+	int		sign;
+
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
+		i++;
+	if (s[i] == '+' || s[i] == '-')
+	{
+		if (s[i++] == '-')
+			sign *= -1;
+	}
+	while (s[i] != '\0')
+	{
+		if (ft_strchr("0123456789", str[i]) == NULL)
+			return (0);
+		nbr = nbr * 10 + sign * (s[i++] - '0');
+		if (nbr < INT_MIN || nbr > INT_MAX)
+			return (0);
+	}
 	return (1);
 }
 
