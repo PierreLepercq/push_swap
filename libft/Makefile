@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/05 17:08:02 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/26 12:00:37 by plepercq         ###   ########.fr        #
+#    Updated: 2026/04/01 18:52:03 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,10 @@ FT_LIB		+=	ft_putchar_fd	\
 				ft_putstr_fd	\
 				ft_putendl_fd	\
 				ft_putnbr_fd	\
+
+FT_LIB		+=	ft_abs			\
+				ft_max			\
+				ft_min			\
 
 #	FT_PRINTF
 FT_PRINTF	=	ft_printf		\

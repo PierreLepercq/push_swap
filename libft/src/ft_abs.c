@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:32:30 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 14:46:12 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/01 18:50:39 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/01 18:51:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-
-void	rotate(t_stack **stack)
+int	abs(int n)
 {
-	*stack = (*stack)->next;
-	stack_index(stack);
+	if (n < 0)
+		return (-n);
+	return (n);
 }

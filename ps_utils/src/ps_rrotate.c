@@ -1,19 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ps_rrotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:32:30 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 14:46:12 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/01 14:44:59 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/01 15:40:31 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "ps_utils.h"
 
-void	rotate(t_stack **stack)
+int	rra(t_stacks *stacks)
 {
-	*stack = (*stack)->next;
-	stack_index(stack);
+	char	*str;
+	t_list	*new;
+
+	ft_printf("rra");
+	rrotate(stacks->stack_a);
+}
+
+int	rrb(t_stacks *stacks, t_list **instructions)
+{
+	ft_printf("rrb");
+	rrotate(stacks->stack_b);
+}
+
+int	rrr(t_stacks *stacks, t_list **instructions)
+{
+	ft_printf("rrr");
+	rrotate(stacks->stack_a);
+	rrotate(stacks->stack_b);
 }

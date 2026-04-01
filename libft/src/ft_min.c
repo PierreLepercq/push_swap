@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:32:30 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 14:46:12 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/01 17:59:08 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/01 18:01:03 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-
-void	rotate(t_stack **stack)
+int	ft_min(int n1, int n2)
 {
-	*stack = (*stack)->next;
-	stack_index(stack);
+	if (n1 < n2)
+		return (n1);
+	return (n2);
 }

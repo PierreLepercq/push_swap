@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/26 11:55:50 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/01 18:52:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+
+/*	EXTRA			*/
+int					ft_abs(int n);
+int					ft_max(int n1, int n2);
+int					ft_min(int n1, int n2);
 
 /*  FT_LIST        	*/
 t_list				*ft_lstnew(void *content);

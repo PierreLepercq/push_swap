@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/03/26 11:24:56 by plepercq         ###   ########.fr        #
+#    Updated: 2026/04/01 15:44:13 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ LINKS		= $(foreach lib, $(LIBS),-L lib$(lib) -l $(lib))
 
 INC			= $(foreach lib, $(LIBS_DIR),-I $(lib)/include)
 INC			+= -I stack/include
+INC			+= -I ps_utils/include
 INC			+= -I sort_algorithms/include
 
 CFILES 		= 	push_swap.c								\
@@ -31,6 +32,12 @@ CFILES 		= 	push_swap.c								\
 				./stack/src/utils1.c					\
 				./stack/src/utils2.c					\
 				./stack/src/utils3.c					\
+				./ps_utils/src/ps_actions.c				\
+				./ps_utils/src/ps_push.c				\
+				./ps_utils/src/ps_rotate.c				\
+				./ps_utils/src/ps_rrotate.c				\
+				./ps_utils/src/ps_stacks.c				\
+				./ps_utils/src/ps_swap.c				\
 				./sort_algorithms/src/test_algorithm.c	\
 				./sort_algorithms/src/turk_algorithm.c	\
 

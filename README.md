@@ -1,12 +1,12 @@
 *This project has been created as part of the 42 curriculum by <plepercq>*.
 
-# Get Next Line
+# Push Swap
 
-[Subject](https://cdn.intra.42.fr/pdf/pdf/188916/en.subject.pdf)
+[Subject](https://cdn.intra.42.fr/pdf/pdf/192339/en.subject.pdf)
 
 ### Description
 
-**Get Next Line** is a function written in C whose goal is to return, for a given file descriptor, its content line by line. Each call of the function returns either the next line from the file pointed to by the file descriptor, or NULL if an error occurs or if the offset met the end of the file.
+**Push Swap** is a program written in C whose purpose is to return the shortest series of actions to execute on 2 given stacks in order to sort a list of integers passed as arguments.
 
 This project introduces us to static variables. Static means they remain in memory even after exiting the function where they have been declared. Static variables are very useful to save an execution state or stash anything for a later function call.
 

@@ -6,30 +6,73 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/25 16:01:15 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/01 19:19:27 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	abs(int value)
+int	nrot(t_stack *n)
 {
-	if (value < 0)
-		return (-value);
-	return (value);
+	return (n->id);
 }
 
-int	get_rotations_count(t_stack **stack, t_stack *node)
+int	nrrot(t_stack *n)
 {
-	int	len;
-	int	count;
+	return (stack_len(n) - n->id);
+}
 
-	len = stack_len(stack);
-	if (node->id * 2 < len)
-		count = -1 * node->id;
-	else
-		count = len - node->id;
-	return (count);
+int	*get_fewest_rots_to_head(t_stack *n1, t_stack *n2)
+{
+	int	rots;
+	int	comp;
+	int	common;
+
+	common = 0;
+	rots = nrot(n1) + nrrot(n2);
+	comp = nrrot(n1) + nrot(n2);
+	if (comp < rots)
+		rots = comp;
+	comp = ft_max(nrot(n1), nrot(n2));
+	if (comp < rots)
+	{
+		rots = comp;
+		common = ft_min()
+	}
+	comp = ft_max(nrrot(n1), nrrot(n2));
+	if (comp < rots)
+	{
+		rots = comp;
+	}
+
+
+
+	comp = nrot(n1) + nrrot(n2);
+	if (comp < rots)
+		rots = comp;
+	comp = nrrot(n1) + nrot(n2);
+	if (comp < rots)
+		rots = comp;
+	return (rots);
+}
+
+t_list	*rotate_to_head1()
+
+int	*rotate_to_head(t_stacks stacks, t_stack *node)
+{
+	int	rots;
+	int	min;
+
+	min = get_fewest_rots_to_head(node, node->target);
+	if (min == ft_max(nrot(node), nrot(node->target)))
+		return (rotate_to_head1());
+	if (min == ft_max(nrrot(node), nrrot(node->target)))
+		return (0);
+	if (min == nrot(node) + nrrot(node->target))
+		return (0);
+	if (min == nrrot(node) + nrot(node->target))
+		return (0);
+	return (rots);
 }
 
 t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
@@ -52,31 +95,31 @@ t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
 	return (target);
 }
 
-t_stack	*evaluate_cost(t_stack **stack_a, t_stack **stack_b)
+t_stack	*evaluate_cost(t_stack **s1, t_stack **s2)
 {
 	t_stack	*node;
 	t_stack	*cheapest;
 
-	if (*stack_a == NULL || *stack_b == NULL)
+	if (*s1 == NULL || *s2 == NULL)
 		return (NULL);
-	node = *stack_a;
+	node = *s1;
 	cheapest = node;
 	while (node)
 	{
-		node->target = get_closest_smaller_target(node, stack_b);
-		node->cost = abs(get_rotations_count(stack_a, node));
-		node->cost += abs(get_rotations_count(stack_a, node->target));
+		node->target = get_closest_smaller_target(node, s2);
+		node->cost = get_fewest_rots_to_head(node, node->target);
 		if (node->cost < cheapest->cost)
 			cheapest = node;
 		node = node->next;
-		if (node == *stack_a)
+		if (node == s1)
 			break ;
 	}
-	ft_printf("\n----------------------------");
-	ft_printf("\ncheapest : %i\n", cheapest->value);
-	ft_printf("target : %i\n", cheapest->target->value);
 	return (cheapest);
 }
+
+//ft_printf("\n----------------------------");
+//ft_printf("\ncheapest : %i\n", cheapest->value);
+//ft_printf("target : %i\n", cheapest->target->value);
 
 //void	move_to_head(t_stack *node)
 //{
@@ -144,37 +187,24 @@ void	sort_three(t_stack **stack)
 		swap(stack);
 }
 
-void	turk_algorithm(t_stack **stack_a, t_stack **stack_b)
+void	turk_algorithm(t_stacks *stacks)
 {
-	while (stack_len(stack_a) > 3)
+	while (stack_len(stacks->stack_a) > 3)
 	{
-		stack_print(stack_a, "stack A");
-		stack_print(stack_b, "stack B");
-		if (stack_len(stack_b) < 2)
+		if (stack_len(stacks->stack_b) < 2)
 		{
-			push(stack_a, stack_b);
+			pa(stacks);
 			continue ;
 		}
-		move_cheapest(stack_a, stack_b, 0);
+		move_cheapest(stacks->stack_a, stacks->stack_b, 0);
 	}
-	stack_print(stack_a, "stack A");
-	stack_print(stack_b, "stack B");
-
-	sort_three(stack_a);
-
-	stack_print(stack_a, "stack A");
-	stack_print(stack_b, "stack B");
-
-	while (stack_len(stack_b) > 0)
+	sort_three(stacks->stack_a);
+	while (stack_len(stacks->stack_b) > 0)
 	{
-		evaluate_cost(stack_b, stack_a);
-		move_cheapest(stack_b, stack_a, 1);
-		stack_print(stack_a, "stack A");
-		stack_print(stack_b, "stack B");
+		evaluate_cost(stacks->stack_b, stacks->stack_a);
+		move_cheapest(stacks->stack_b, stacks->stack_a, 1);
 	}
-
-	mode_node_to_stack_head(stack_min(stack_a), stack_a);
-
-	stack_print(stack_a, "stack A");
-	stack_print(stack_b, "stack B");
+	mode_node_to_stack_head(stack_min(stacks->stack_a), stacks->stack_a);
+	stack_print(stacks->stack_a, "stack A");
+	stack_print(stacks->stack_b, "stack B");
 }

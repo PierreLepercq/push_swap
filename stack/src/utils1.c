@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:11:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/25 18:44:06 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/01 14:16:58 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,24 @@ void	stack_iter(t_stack **stack, void (*f)(void *))
 		f(node);
 		node = node->next;
 	}
+}
+
+int	has_duplicates(t_stack **stack)
+{
+	t_stack	*node;
+	t_stack	*other;
+
+	node = *stack;
+	while (node->next != *stack)
+	{
+		other = node->next;
+		while (other != *stack)
+		{
+			if (node->value == other->value)
+				return (1);
+			other = other->next;
+		}
+		node = node->next;
+	}
+	return (0);
 }
