@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 19:19:27 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/02 12:43:31 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,26 @@ t_stack	*get_closest_smaller_target(t_stack *node, t_stack **stack)
 	if (cursor->value > target->value && cursor->value < node->value)
 		target = cursor;
 	return (target);
+}
+
+t_stack	*get_closest_smaller(t_stack *node)
+{
+	t_stack	*cursor;
+	t_stack	*closest;
+
+	closest = stack_min(node);
+	cursor = node;
+	while (cursor->next != node)
+	{
+		if (cursor->value > closest->value && cursor->value < node->value)
+			closest = cursor;
+		cursor = cursor->next;
+	}
+	if (cursor->value > node->value && cursor->value < node->value)
+		closest = cursor;
+	if (closest == node)
+		closest = NULL;
+	return (closest);
 }
 
 t_stack	*evaluate_cost(t_stack **s1, t_stack **s2)
@@ -187,8 +207,27 @@ void	sort_three(t_stack **stack)
 		swap(stack);
 }
 
+t_stack	*get_median(t_stack	*stack)
+{
+	int	id;
+	int	len;
+
+	len = stack_len(stack);
+	id = len / 2;
+	if (len % 2 == 1)
+		id++;
+	len = 0;
+	while (len < id)
+	{
+		
+	}
+}
+
 void	turk_algorithm(t_stacks *stacks)
 {
+	t_stack	*median;
+
+	median = get_median(stacks->stack_a);
 	while (stack_len(stacks->stack_a) > 3)
 	{
 		if (stack_len(stacks->stack_b) < 2)
