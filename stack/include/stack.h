@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:09:57 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 14:32:37 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/02 15:30:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ typedef struct s_stack
 t_stack				*stack_new(int value);
 void				stack_free(t_stack **stack);
 int					stack_len(t_stack **stack);
+int					stask_is_sorted(t_stack	*stack);
 void				stack_iter(t_stack **stack, void (*f)(void *));
-int					has_duplicates(t_stack **stack);
 void				stack_index(t_stack **stack);
 void				stack_add_front(t_stack **stack, t_stack *new);
 void				stack_add_back(t_stack **stack, t_stack *new);
 t_stack				*stack_min(t_stack **stack);
 t_stack				*stack_max(t_stack **stack);
+int					has_duplicates(t_stack **stack);
 void				stack_print(t_stack **stack, const char *label);
 
 /*  OPERATORS   */

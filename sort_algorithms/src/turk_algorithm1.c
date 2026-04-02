@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   turk_algorithm.c                                   :+:      :+:    :+:   */
+/*   turk_algorithm1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:19:07 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 12:43:31 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:41:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,26 @@ int	*get_fewest_rots_to_head(t_stack *n1, t_stack *n2)
 	if (comp < rots)
 		rots = comp;
 	comp = ft_max(nrot(n1), nrot(n2));
-	if (comp < rots)
-	{
-		rots = comp;
-		common = ft_min()
-	}
-	comp = ft_max(nrrot(n1), nrrot(n2));
-	if (comp < rots)
-	{
-		rots = comp;
-	}
-
-
-
-	comp = nrot(n1) + nrrot(n2);
-	if (comp < rots)
-		rots = comp;
-	comp = nrrot(n1) + nrot(n2);
-	if (comp < rots)
-		rots = comp;
-	return (rots);
+//	if (comp < rots)
+//	{
+//		rots = comp;
+//		common = ft_min()
+//	}
+//	comp = ft_max(nrrot(n1), nrrot(n2));
+//	if (comp < rots)
+//	{
+//		rots = comp;
+//	}
+//
+//
+//
+//	comp = nrot(n1) + nrrot(n2);
+//	if (comp < rots)
+//		rots = comp;
+//	comp = nrrot(n1) + nrot(n2);
+//	if (comp < rots)
+//		rots = comp;
+//	return (rots);
 }
 
 t_list	*rotate_to_head1()
@@ -211,16 +211,19 @@ t_stack	*get_median(t_stack	*stack)
 {
 	int	id;
 	int	len;
+	t_stack	*median;
 
 	len = stack_len(stack);
 	id = len / 2;
 	if (len % 2 == 1)
 		id++;
 	len = 0;
+	median = stack_max(stack);
 	while (len < id)
 	{
-		
+		median = get_closest_smaller(median);
 	}
+	return (median);
 }
 
 void	turk_algorithm(t_stacks *stacks)
