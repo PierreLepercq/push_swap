@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:27:58 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 15:38:18 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:10:26 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,24 @@
 # include "libft.h"
 # include "stack.h"
 
+typedef struct s_moveset
+{
+	void		(*p)(void *);
+	void		(*r)(void *);
+	void		(*rr)(void *);
+	void		(*s)(void *);
+}				t_moveset;
+
+typedef	struct s_stack_ms
+{
+	t_stack		**st;
+	t_moveset	*ms;
+}				t_stack_ms;
+
 typedef struct s_stacks
 {
-	t_stack		**stack_a;
-	t_stack		**stack_b;
-	t_list		**actions;
+	t_stack_ms		*a;
+	t_stack_ms		*b;
 }				t_stacks;
 
 /*	STACKS		*/

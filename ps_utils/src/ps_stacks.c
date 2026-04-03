@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:37:46 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 15:46:57 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:11:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,33 @@
 
 t_stacks	*stacks_new(void)
 {
-	t_stack		**stack_a;
-	t_stack		**stack_b;
-	t_list		**actions;
+	t_stack		**a;
+	t_stack		**b;
+	t_moveset	*ms_a;
+	t_moveset	*ms_b;
 	t_stacks	*stacks;
 
 	stacks = malloc(sizeof(t_stacks *));
 	if (!stacks)
 		return (NULL);
-	stack_a = malloc(sizeof(t_stack **));
-	stack_b = malloc(sizeof(t_stack **));
-	actions = malloc(sizeof(t_list **));
-	if (!stack_a || !stack_b || !actions)
+	a = malloc(sizeof(t_stack **));
+	b = malloc(sizeof(t_stack **));
+	if (!a || !b)
 	{
-		stack_free(stack_a);
-		stack_free(stack_b);
-		ft_lstclear(actions, free);
+		stack_free(a);
+		stack_free(b);
 		free(stacks);
 		return (NULL);
 	}
-	stacks->stack_a = stack_a;
-	stacks->stack_b = stack_b;
-	stacks->actions = actions;
+	stacks->a = a;
+	stacks->b = b;
 	return (stacks);
 }
 
 void	stacks_free(t_stacks **stacks)
 {
-	stack_free((*stacks)->stack_a);
-	stack_free((*stacks)->stack_b);
+	stack_free((*stacks)->a);
+	stack_free((*stacks)->b);
 	ft_lstclear((*stacks)->actions, free);
 	stacks = NULL;
 	free(stacks);

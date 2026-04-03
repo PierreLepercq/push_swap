@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_swap.c                                          :+:      :+:    :+:   */
+/*   ps_display.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 14:44:54 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 21:12:28 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/03 19:24:45 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/03 19:45:19 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-void	sa(t_stacks *stacks)
+void    stacks_display(t_stacks *stacks)
 {
-	ft_printf("sa");
-	swap(stacks->a);
-}
+    int len_a;
+    int len_b;
 
-void	sb(t_stacks *stacks)
-{
-	ft_printf("sb");
-	swap(stacks->b);
-}
-
-void	ss(t_stacks *stacks)
-{
-	ft_printf("ss");
-	swap(stacks->a);
-	swap(stacks->b);
+    len_a = stack_len(stacks->a);
+    len_b = stack_len(stacks->b);
+    //if (len_a > len_b)
+    //{
+    //    
+    //}
 }

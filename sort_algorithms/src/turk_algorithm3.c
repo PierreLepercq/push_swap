@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   turk_algorithm2.c                                  :+:      :+:    :+:   */
+/*   turk_algorithm3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:14:20 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/03 17:29:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:07:21 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
+/*	ROTATIONS COUNT	*/
 int	nrot(t_stack *n)
 {
 	return (n->id);
@@ -20,6 +21,20 @@ int	nrot(t_stack *n)
 int	nrrot(t_stack *n)
 {
 	return (stack_len(n) - n->id);
+}
+
+/*	*/
+void	sort_three(t_stack **stack)
+{
+	t_stack	*max;
+
+	max = stack_max(stack);
+	if (max->id == 0)
+		rotate(stack);
+	if (max->id == 1)
+		rrotate(stack);
+	if ((*stack)->value > (*stack)->next->value)
+		swap(stack);
 }
 
 t_stack	*get_closest_smaller(t_stack *stack, t_stack *node)
@@ -71,90 +86,31 @@ t_stack	*get_median(t_stack *stack)
 	return (median);
 }
 
-void	rotate_one(t_stack *node, t_moveset *ms)
+int	fewest_rot_to_head(t_stack *n1, t_stack *n2, int exec)
 {
-	int	i;
-	int	rot;
-	int	rrot;
-
-	rot = nrot(node);
-	rrot = nrrot(node);
-	if (rot < rrot)
-	{
-		i = rot;
-		while (i-- > 0)
-			ms->r(node);
-	}
-	else
-	{
-		i = rrot;
-		while (i-- > 0)
-			ms->rr(node);
-	}
+	
 }
 
-void	rotate_both()
-
-void	rotate_to_head(t_stack *node, t_moveset ms)
+t_stack	*evaluate_cost(t_stack **src, t_stack **dest)
 {
-	int	i;
-	int	rot;
-	int	rrot;
+	t_stack	*node;
+	t_stack	*cheapest;
 
-	rot = nrot(node);
-	rrot = nrrot(node);
-	i = ft_min(rot, rrot);
-	while (i > 0)
-	{
-		
-	}
-	if (nrot(node) < nrrot(node))
-		rotdir = 1;
-
-}
-
-t_moveset	*create_moveset(
-	void (*func_push)(void *),
-	void (*func_rotate)(void *),
-	void (*func_rrotate)(void *),
-	void (*func_swap)(void *))
-{
-	t_moveset	*ms;
-
-	ms = malloc(sizeof(t_moveset));
-	if (!ms)
+	if (*src == NULL || *dest == NULL)
 		return (NULL);
-	ms->p = func_push;
-	ms->r = func_rotate;
-	ms->rr = func_rrotate;
-	ms->s = func_swap;
-}
-
-t_movesets	*get_movesets(void)
-{
-	t_movesets	*ms;
-	t_moveset	*ms_a;
-	t_moveset	*ms_b;
-
-	ms = malloc(sizeof(t_movesets));
-	if (!ms)
-		return (NULL);
-	ms_a = create_moveset(pa, ra, rra, sa);
-	if (!ms_a)
-		return (free(ms), NULL);
-	ms_b = create_moveset(pb, rb, rrb, sb);;
-	if (!ms_b)
-		return (free(ms), free(ms_a), NULL);
-	ms->a = ms_a;
-	ms->b = ms_b;
-	return (ms);
-}
-
-void	free_movesets(t_movesets *ms)
-{
-	free(ms->a);
-	free(ms->b);
-	free(ms);
+	node = *src;
+	cheapest = node;
+	while (node)
+	{
+		node->target = get_target(dest, node);
+		node->cost = get_fewest_rots_to_head(node, node->target);
+		if (node->cost < cheapest->cost)
+			cheapest = node;
+		node = node->next;
+		if (node == src)
+			break ;
+	}
+	return (cheapest);
 }
 
 void	turk_algorithm(t_stacks *stacks)
@@ -176,15 +132,4 @@ void	turk_algorithm(t_stacks *stacks)
 		move_cheapest(stacks->b, stacks->a, 1);
 	}
 	rotate_to_head(stack_min(stacks->a), stacks->a);
-
-
-	
-	while (stack_len(stacks->b) > 0)
-	{
-		evaluate_cost(stacks->b, stacks->a);
-		move_cheapest(stacks->b, stacks->a, 1);
-	}
-	mode_node_to_stack_head(stack_min(stacks->a), stacks->a);
-	stack_print(stacks->a, "stack A");
-	stack_print(stacks->b, "stack B");
 }

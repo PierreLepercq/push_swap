@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:44:59 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 15:40:31 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/02 21:12:26 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int	rra(t_stacks *stacks)
 	t_list	*new;
 
 	ft_printf("rra");
-	rrotate(stacks->stack_a);
+	rrotate(stacks->a);
 }
 
 int	rrb(t_stacks *stacks, t_list **instructions)
 {
 	ft_printf("rrb");
-	rrotate(stacks->stack_b);
+	rrotate(stacks->b);
 }
 
 int	rrr(t_stacks *stacks, t_list **instructions)
 {
 	ft_printf("rrr");
-	rrotate(stacks->stack_a);
-	rrotate(stacks->stack_b);
+	rrotate(stacks->a);
+	rrotate(stacks->b);
 }

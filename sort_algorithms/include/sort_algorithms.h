@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:25:15 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 16:56:23 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/02 21:08:09 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_moveset
 
 typedef struct s_movesets
 {
-	t_moveset	*ms_a;
-	t_moveset	*ms_b;
+	t_moveset	*a;
+	t_moveset	*b;
 }				t_movesets;
 
 void			test_algorithm(t_stacks *stacks);

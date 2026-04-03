@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_swap.c                                          :+:      :+:    :+:   */
+/*   ps_moveset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 14:44:54 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 21:12:28 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/03 20:07:27 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/03 20:09:08 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-void	sa(t_stacks *stacks)
+t_moveset	*init_ms(
+	void (*func_push)(void *),
+	void (*func_rotate)(void *),
+	void (*func_rrotate)(void *),
+	void (*func_swap)(void *))
 {
-	ft_printf("sa");
-	swap(stacks->a);
-}
+	t_moveset	*ms;
 
-void	sb(t_stacks *stacks)
-{
-	ft_printf("sb");
-	swap(stacks->b);
-}
-
-void	ss(t_stacks *stacks)
-{
-	ft_printf("ss");
-	swap(stacks->a);
-	swap(stacks->b);
+	ms = malloc(sizeof(t_moveset));
+	if (!ms)
+		return (NULL);
+	ms->p = func_push;
+	ms->r = func_rotate;
+	ms->rr = func_rrotate;
+	ms->s = func_swap;
 }
