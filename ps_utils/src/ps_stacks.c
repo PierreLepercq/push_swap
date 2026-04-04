@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:37:46 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:19:50 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 16:28:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,25 @@ void	stacks_free(t_stacks **stacks)
 	stack_free((*stacks)->b);
 	stacks = NULL;
 	free(stacks);
+}
+
+t_stacks	*init_stacks(int *values)
+{
+	int			i;
+	t_stack		*node;
+	t_stacks	*stacks;
+
+	stacks = stacks_new();
+	if (!stacks)
+		return (NULL);
+	i = 0;
+	while (values[i] != NULL)
+	{
+		node = stack_new(values[i]);
+		if (node == NULL)
+			return (stacks_free(stacks), NULL);
+		stack_add_back(stacks->a, node);
+		i++;
+	}
+	return (stacks);
 }

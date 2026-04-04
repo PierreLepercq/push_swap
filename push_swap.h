@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 15:53:42 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 15:42:13 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 16:09:18 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <limits.h>
+# include <stdbool.h>
 # include "libft.h"
 # include "stack.h"
 # include "ps_utils.h"

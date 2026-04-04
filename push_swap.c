@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/02 17:10:56 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/01 15:50:56 by plepercq         ###   ########.fr       */
+/*   Created: 2026/04/04 15:57:32 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/04 16:30:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,69 +39,87 @@ int	check_atoi(const char *s)
 	return (1);
 }
 
-t_stack	**init_stack(t_stack **stack, char **inputs, int len)
+int	*strs_to_ints(char **strs, int len)
 {
-	int		i;
-	int		value;
-	t_stack	*node;
+	int	i;
+	int	*ints;
 
 	i = 0;
-	stack_free(stack);
+	ints = malloc(sizeof(int) * (len + 1));
+	if (ints == NULL)
+		return (NULL);
 	while (i < len)
 	{
-		if (check_atoi(inputs[i]) == 0)
-			return (stack_free(stack), NULL);
-		value = ft_atoi(inputs[i]);
-		node = stack_new(value);
-		if (node == NULL)
-			return (stack_free(stack), NULL);
-		stack_add_back(stack, node);
+		if (check_atoi(strs[i]) == 0)
+			return (free(ints), NULL);
+		ints[i] = ft_atoi(strs[i]);
 		i++;
 	}
-	return (stack);
+	ints[i] = NULL;
+	return (ints);
 }
 
-t_stack	**init_stack_from_str(t_stack **stack, char *str)
+int	*confo_inputs(char **inputs, int len)
 {
 	int		i;
+	int		*values;
 	char	**strs;
 
-	i = 0;
-	while (str[i] != '\0')
+	if (len > 1)
+		values = strs_to_ints(inputs, len);
+	else
 	{
-		if (ft_strchr(" 0123456789-+", str[i]) == NULL)
+		strs = ft_split(inputs, " ");
+		if (!strs)
 			return (NULL);
+		i = 0;
+		while (strs[i] != NULL)
+			i++;
+		values = strs_to_ints(strs, i);
+		free(strs);
 	}
-	strs = ft_split(str, " ");
-	if (!strs)
-		return (NULL);
-	i = 0;
-	while (strs[i] != NULL)
-		i++;
-	init_stack(stack, strs, i);
-	free(strs);
-	return (stack);
+	return (values);
+}
+
+bool	has_duplicates(int *values)
+{
+	int	i;
+	int	*v1;
+	int	*v2;
+
+	if (!values)
+		return (false);
+	v1 = values;
+	while (v1 != NULL)
+	{
+		i = 1;
+		while (v1[i] != NULL)
+		{
+			if (v1[i] == *v1)
+				return (true);
+			i++;
+		}
+		v1++;
+	}
+	return (false);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stacks		*stacks;
+	int			*values;
+	t_stacks	*stacks;
 
 	if (argc == 1)
-		return (ft_printf("error : number arguments\n"), 0);
-	stacks = stacks_new();
-	if (!stacks)
 		return (0);
-	if (argc == 2)
-		stacks->stack_a = init_stack_from_str(stacks->stack_a, argv[1]);
-	// todo check if error in init stack (pour le momoent la stack est juste egale a null)
-	else
-		stacks->stack_a = init_stack(stacks->stack_a, &argv[1], argc - 1);
-	if (has_duplicates(stacks->stack_a))
-	{
-		ft_printf("error\n");
-		return (stacks_free(stacks), 0);
-	}
+	values = confo_inputs(&argv[1], argc - 1);
+	if (values == NULL)
+		return (ft_printf("error\n"), 0);
+	if (has_duplicates(values))
+		return (free(values), ft_printf("error\n"), 0);
+	stacks = init_stacks(values);
+	if (!stacks)
+		return (free(values), ft_printf("error\n"), 0);
+	free(values);
 	turk_algorithm(stacks);
 	return (stacks_free(stacks), 0);
 }
