@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:27:58 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/03 20:10:26 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 10:53:06 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_stacks
 	t_stack_ms		*a;
 	t_stack_ms		*b;
 }				t_stacks;
+
+/*	MOVESET		*/
+
 
 /*	STACKS		*/
 t_stacks		*stacks_new(void);

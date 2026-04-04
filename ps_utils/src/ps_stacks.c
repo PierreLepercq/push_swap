@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:37:46 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/03 20:11:14 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 10:53:08 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_stacks	*stacks_new(void)
 		return (NULL);
 	a = malloc(sizeof(t_stack **));
 	b = malloc(sizeof(t_stack **));
+	ms_a = init;
 	if (!a || !b)
 	{
 		stack_free(a);

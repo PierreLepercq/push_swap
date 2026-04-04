@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 15:14:20 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/03 20:07:21 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 10:53:04 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ t_stack	*get_median(t_stack *stack)
 		median = get_closest_smaller(stack, median);
 	}
 	return (median);
-}
-
-int	fewest_rot_to_head(t_stack *n1, t_stack *n2, int exec)
-{
-	
 }
 
 t_stack	*evaluate_cost(t_stack **src, t_stack **dest)
