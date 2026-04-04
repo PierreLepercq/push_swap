@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:37:46 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 10:53:08 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:19:50 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ t_stacks	*stacks_new(void)
 {
 	t_stack		**a;
 	t_stack		**b;
-	t_moveset	*ms_a;
-	t_moveset	*ms_b;
 	t_stacks	*stacks;
 
 	stacks = malloc(sizeof(t_stacks *));
@@ -25,7 +23,6 @@ t_stacks	*stacks_new(void)
 		return (NULL);
 	a = malloc(sizeof(t_stack **));
 	b = malloc(sizeof(t_stack **));
-	ms_a = init;
 	if (!a || !b)
 	{
 		stack_free(a);
@@ -42,7 +39,6 @@ void	stacks_free(t_stacks **stacks)
 {
 	stack_free((*stacks)->a);
 	stack_free((*stacks)->b);
-	ft_lstclear((*stacks)->actions, free);
 	stacks = NULL;
 	free(stacks);
 }

@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:27:58 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 10:53:06 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:26:46 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,18 @@
 # include "libft.h"
 # include "stack.h"
 
-typedef struct s_moveset
-{
-	void		(*p)(void *);
-	void		(*r)(void *);
-	void		(*rr)(void *);
-	void		(*s)(void *);
-}				t_moveset;
-
-typedef	struct s_stack_ms
-{
-	t_stack		**st;
-	t_moveset	*ms;
-}				t_stack_ms;
-
 typedef struct s_stacks
 {
-	t_stack_ms		*a;
-	t_stack_ms		*b;
+	t_stack		**a;
+	t_stack		**b;
 }				t_stacks;
-
-/*	MOVESET		*/
-
 
 /*	STACKS		*/
 t_stacks		*stacks_new(void);
 void			stacks_free(t_stacks **stacks);
 
 /*	ACTIONS		*/
-//	Utilities
-t_list			*action_new(const char *str);
-void			action_add_back(t_list **lst, t_list *node);
-void			action_insert(t_list *lst, t_list *node);
-void			action_del(t_list **lst, t_list *node);
+void			moven(t_stacks *stacks, void (*move_func)(void *), int n);
 //	Push
 void			pa(t_stacks *stacks);
 void			pb(t_stacks *stacks);

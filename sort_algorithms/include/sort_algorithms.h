@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:25:15 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 21:08:09 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/04 15:21:54 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,6 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-typedef struct s_moveset
-{
-	void		(*p)(void *);
-	void		(*r)(void *);
-	void		(*rr)(void *);
-	void		(*s)(void *);
-}				t_moveset;
-
-typedef struct s_movesets
-{
-	t_moveset	*a;
-	t_moveset	*b;
-}				t_movesets;
 
 void			test_algorithm(t_stacks *stacks);
 void			turk_algorithm(t_stacks *stacks);
