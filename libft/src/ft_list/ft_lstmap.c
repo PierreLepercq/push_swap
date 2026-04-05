@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:35:04 by plepercq          #+#    #+#             */
-/*   Updated: 2025/11/20 18:46:27 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 16:29:55 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	lstaddmodified(t_list **lst, t_list *elem, void *(*f)(void *),
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		i;
 	t_list	*lst2;
 
 	if (!lst)
 		return (NULL);
 	lst2 = NULL;
-	i = 0;
 	while (lst)
 	{
 		lstaddmodified(&lst2, lst, f, del);

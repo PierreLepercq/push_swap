@@ -6,50 +6,50 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:16 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:43:39 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 23:34:05 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	*get_fewest_rotations(t_stack *node, t_stack *target, int *id)
+int	get_fewest_rotations(t_stack *node, t_stack *target, int *id)
 {
-	int	rots;
-	int	comp;
+	int	move_id;
+	int	move1;
+	int	move2;
+	int	move3;
+	int	move4;
+	int	min_rots;
 
-	*id = 0;
-	rots = nrot(node) + nrrot(target);
-	comp = nrrot(node) + nrot(target);
-	if (comp < rots)
-	{
-		*id = 1;
-		rots = comp;
-	}
-	comp = ft_max(nrot(node), nrot(target));
-	if (comp < rots)
-	{
-		*id = 2;
-		rots = comp;
-	}
-	comp = ft_max(nrrot(node), nrrot(target));
-	if (comp < rots)
-	{
-		*id = 3;
-		rots = comp;
-	}
-	return (rots);
+	move_id = 0;
+	move1 = nrot(node) + nrrot(target);
+	move2 = nrrot(node) + nrot(target);
+	move3 = ft_max(nrot(node), nrot(target));
+	move4 = ft_max(nrrot(node), nrrot(target));
+	min_rots = ft_min(move1, move2);
+	min_rots = ft_min(min_rots, move3);
+	min_rots = ft_min(min_rots, move4);
+	if (min_rots == move2)
+		move_id = 1;
+	if (min_rots == move3)
+		move_id = 2;
+	if (min_rots == move4)
+		move_id = 3;
+	if (id != NULL)
+		*id = move_id;
+	return (min_rots);
 }
 
 void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks->a, ra, nrot(cheapest));
-	moven(stacks->b, rrb, nrot(cheapest->target));
+	moven(stacks, ra, nrot(cheapest));
+	moven(stacks, rrb, nrot(cheapest->target));
 }
 
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks->a, rra, nrot(cheapest));
-	moven(stacks->b, rb, nrot(cheapest->target));
+	moven(stacks, rra, nrot(cheapest));
+	moven(stacks, rb, nrot(cheapest->target));
 }
 
 void	rotate_both(t_stacks *stacks, t_stack *cheapest)

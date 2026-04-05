@@ -6,13 +6,13 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:25:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:27:19 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 18:59:04 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-void	moven(t_stacks *stacks, void (*move_func)(void *), int n)
+void	moven(t_stacks *stacks, void (*move_func)(t_stacks *), int n)
 {
 	int	i;
 

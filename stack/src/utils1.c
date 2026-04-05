@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:11:37 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/02 15:30:06 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 23:17:51 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ t_stack	*stack_new(int value)
 	t_stack	*new;
 
 	new = malloc(sizeof(t_stack));
-	if (!new)
+	if (new == NULL)
 		return (NULL);
 	new->id = 0;
 	new->value = value;
+	new->cost = 0;
 	new->next = NULL;
 	new->prev = NULL;
+	new->target = NULL;
 	return (new);
 }
 
@@ -31,7 +33,7 @@ void	stack_free(t_stack **stack)
 	t_stack	*node;
 	t_stack	*next;
 
-	if (*stack == NULL)
+	if (stack == NULL || *stack == NULL)
 		return ;
 	node = (*stack)->next;
 	while (node != *stack)
@@ -41,6 +43,7 @@ void	stack_free(t_stack **stack)
 		node = next;
 	}
 	free(node);
+	*stack = NULL;
 }
 
 int	stack_len(t_stack **stack)
@@ -48,7 +51,7 @@ int	stack_len(t_stack **stack)
 	int		i;
 	t_stack	*node;
 
-	if (*stack == NULL)
+	if (stack == NULL || *stack == NULL)
 		return (0);
 	i = 1;
 	node = (*stack)->next;
@@ -60,7 +63,7 @@ int	stack_len(t_stack **stack)
 	return (i);
 }
 
-int	stask_is_sorted(t_stack	*stack)
+int	stack_is_sorted(t_stack	**stack)
 {
 	t_stack	*min;
 	t_stack	*cursor;
@@ -69,7 +72,7 @@ int	stask_is_sorted(t_stack	*stack)
 	cursor = min;
 	while (cursor->next != min)
 	{
-		if (cursor > cursor->next)
+		if (cursor->value > cursor->next->value)
 			return (0);
 		cursor = cursor->next;
 	}

@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/04/04 16:31:59 by plepercq         ###   ########.fr        #
+#    Updated: 2026/04/05 19:24:25 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ INC			+= -I sort_algorithms/include
 CFILES 		= 	push_swap.c								\
 				./stack/src/push.c						\
 				./stack/src/rotate.c					\
+				./stack/src/rrotate.c					\
 				./stack/src/swap.c						\
 				./stack/src/utils1.c					\
 				./stack/src/utils2.c					\
@@ -47,7 +48,7 @@ $(NAME): $(ARCHIVES) $(OBJECTS)
 	@echo ""
 	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(CFILES) $(LINKS)
 	@echo "\n-> $(NAME) : OK"
-	./push_swap -45 2 7 27 58 62 34 15 01 56
+#./push_swap -45 2 7 27 58 62 34 15 01 56
 
 $(ARCHIVES):
 	@echo "\nBuilding required libraries :"

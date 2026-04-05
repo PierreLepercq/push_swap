@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 19:02:31 by plepercq          #+#    #+#             */
-/*   Updated: 2025/11/17 14:52:37 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 16:29:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t	i;
 	void	*ptr;
 
-	i = 0;
 	ptr = malloc(nmemb * size);
 	if (!ptr)
 		return (0);

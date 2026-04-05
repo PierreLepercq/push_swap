@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:27:58 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:26:46 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:08:45 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ typedef struct s_stacks
 
 /*	STACKS		*/
 t_stacks		*stacks_new(void);
-void			stacks_free(t_stacks **stacks);
+void			stacks_free(t_stacks *stacks);
+t_stacks		*init_stacks(int *values, int len);
 
 /*	ACTIONS		*/
-void			moven(t_stacks *stacks, void (*move_func)(void *), int n);
+void			moven(t_stacks *stacks, void (*move_func)(t_stacks *), int n);
 //	Push
 void			pa(t_stacks *stacks);
 void			pb(t_stacks *stacks);

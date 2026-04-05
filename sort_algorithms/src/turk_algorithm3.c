@@ -6,23 +6,20 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:44:55 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 23:37:27 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-t_stack	*get_target(t_stack *stack, t_stack *node)
+t_stack	*get_target(t_stack **stack, t_stack *node)
 {
-	t_stack	*cursor;
-	t_stack	*target;
-
 	if (stack_min(stack)->value > node->value)
 		return (stack_max(stack));
 	return (get_closest_smaller(stack, node));
 }
 
-t_stack	*get_median(t_stack *stack)
+t_stack	*get_median(t_stack **stack)
 {
 	int		id;
 	int		len;
@@ -37,6 +34,9 @@ t_stack	*get_median(t_stack *stack)
 	while (len < id)
 	{
 		median = get_closest_smaller(stack, median);
+		if (!median)
+			return (NULL);
+		len++;
 	}
 	return (median);
 }
@@ -57,7 +57,7 @@ t_stack	*evaluate_cost(t_stack **src, t_stack **dest)
 		if (node->cost < cheapest->cost)
 			cheapest = node;
 		node = node->next;
-		if (node == src)
+		if (node == *src)
 			break ;
 	}
 	return (cheapest);
@@ -69,7 +69,7 @@ void	move_cheapest_btoa(t_stacks *stacks)
 	t_stack	*cheapest;
 
 	cheapest = evaluate_cost(stacks->b, stacks->a);
-	rot_id = get_fewest_rotations(cheapest, cheapest->target, &rot_id);
+	get_fewest_rotations(cheapest, cheapest->target, &rot_id);
 	if (rot_id == 0)
 		rot_a_rrot_b(stacks, cheapest);
 	if (rot_id == 1)
@@ -78,6 +78,7 @@ void	move_cheapest_btoa(t_stacks *stacks)
 		rotate_both(stacks, cheapest);
 	if (rot_id == 3)
 		rrotate_both(stacks, cheapest);
+	pa(stacks);
 }
 
 void	turk_algorithm(t_stacks *stacks)
@@ -93,13 +94,13 @@ void	turk_algorithm(t_stacks *stacks)
 			rb(stacks);
 	}
 	if (!stack_is_sorted(stacks->a))
-		sort_three(stacks->a);
+		sort_three_a(stacks);
 	while (stack_len(stacks->b) > 0)
 	{
 		move_cheapest_btoa(stacks);
 	}
 	min = stack_min(stacks->a);
-	if (stack_min((*(stacks->a))->id == 0))
+	if (stack_min(stacks->a)->id == 0)
 		return ;
 	if (nrot(min) < nrrot(min))
 		moven(stacks, ra, nrot(min));

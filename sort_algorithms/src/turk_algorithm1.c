@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:21:29 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:43:14 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 23:11:17 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,38 @@ int	nrot(t_stack *node)
 
 int	nrrot(t_stack *node)
 {
-	return (stack_len(node) - node->id);
+	return (stack_len(&node) - node->id);
 }
 
-void	sort_three(t_stack **stack)
+void	sort_three_a(t_stacks *stacks)
 {
 	t_stack	*max;
 
-	max = stack_max(stack);
+	max = stack_max(stacks->a);
 	if (max->id == 0)
-		rotate(stack);
+		ra(stacks);
 	if (max->id == 1)
-		rrotate(stack);
-	if ((*stack)->value > (*stack)->next->value)
-		swap(stack);
+		rra(stacks);
+	if ((*(stacks->a))->value > (*(stacks->a))->next->value)
+		sa(stacks);
 }
 
-t_stack	*get_closest_smaller(t_stack *stack, t_stack *node)
+t_stack	*get_closest_smaller(t_stack **stack, t_stack *node)
 {
 	t_stack	*cursor;
 	t_stack	*closest;
 
+	if (!stack || !*stack || !node)
+        return (NULL);
 	closest = stack_min(stack);
-	cursor = stack;
-	while (cursor->next != stack)
+	cursor = *stack;
+	while (cursor->next != *stack)
 	{
 		if (cursor->value > closest->value && cursor->value < node->value)
 			closest = cursor;
 		cursor = cursor->next;
 	}
-	if (cursor->value > node->value && cursor->value < node->value)
+	if (cursor->value > closest->value && cursor->value < node->value)
 		closest = cursor;
 	if (closest == node)
 		closest = NULL;

@@ -6,30 +6,27 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 14:44:59 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/04 15:51:11 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/05 23:20:29 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_utils.h"
 
-int	rra(t_stacks *stacks)
+void	rra(t_stacks *stacks)
 {
-	char	*str;
-	t_list	*new;
-
-	ft_printf("rra");
+	ft_printf("rra\n");
 	rrotate(stacks->a);
 }
 
-int	rrb(t_stacks *stacks, t_list **instructions)
+void	rrb(t_stacks *stacks)
 {
-	ft_printf("rrb");
+	ft_printf("rrb\n");
 	rrotate(stacks->b);
 }
 
-int	rrr(t_stacks *stacks, t_list **instructions)
+void	rrr(t_stacks *stacks)
 {
-	ft_printf("rrr");
+	ft_printf("rrr\n");
 	rrotate(stacks->a);
 	rrotate(stacks->b);
 }
