@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:16 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/05 23:34:05 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 00:11:12 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int	get_fewest_rotations(t_stack *node, t_stack *target, int *id)
 void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
 {
 	moven(stacks, ra, nrot(cheapest));
-	moven(stacks, rrb, nrot(cheapest->target));
+	moven(stacks, rrb, nrrot(cheapest->target));
 }
 
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, rra, nrot(cheapest));
+	moven(stacks, rra, nrrot(cheapest));
 	moven(stacks, rb, nrot(cheapest->target));
 }
 
@@ -62,6 +62,6 @@ void	rotate_both(t_stacks *stacks, t_stack *cheapest)
 void	rrotate_both(t_stacks *stacks, t_stack *cheapest)
 {
 	moven(stacks, rrr, ft_min(nrrot(cheapest), nrrot(cheapest->target)));
-	moven(stacks, rra, nrot(cheapest));
-	moven(stacks, rrb, nrot(cheapest->target));
+	moven(stacks, rra, nrrot(cheapest));
+	moven(stacks, rrb, nrrot(cheapest->target));
 }

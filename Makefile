@@ -6,7 +6,7 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/04/05 19:24:25 by plepercq         ###   ########.fr        #
+#    Updated: 2026/04/06 00:00:46 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ CFILES 		= 	push_swap.c								\
 				./stack/src/swap.c						\
 				./stack/src/utils1.c					\
 				./stack/src/utils2.c					\
+				./stack/src/utils3.c					\
 				./ps_utils/src/ps_push.c				\
 				./ps_utils/src/ps_rotate.c				\
 				./ps_utils/src/ps_rrotate.c				\

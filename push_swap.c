@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:57:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/05 23:39:06 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 00:01:38 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ bool	has_duplicates(int *values, int len)
 
 int	main(int argc, char **argv)
 {
-	//int			i;
 	int			len;
 	int			*values;
 	t_stacks	*stacks;
@@ -123,15 +122,10 @@ int	main(int argc, char **argv)
 	stacks = init_stacks(values, len);
 	if (!stacks)
 		return (free(values), ft_printf("Error\n"), 0);
-
-	//i = 0;
-	//while (i < len)
-	//{
-	//	ft_printf("\nnbr : %i", values[i]);
-	//	i++;
-	//}
-
 	free(values);
 	turk_algorithm(stacks);
+
+	stack_print(stacks->a, "A");
+
 	return (stacks_free(stacks), 0);
 }

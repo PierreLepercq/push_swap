@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:09:57 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/05 18:35:19 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 00:01:03 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void				stack_add_front(t_stack **stack, t_stack *new);
 void				stack_add_back(t_stack **stack, t_stack *new);
 t_stack				*stack_min(t_stack **stack);
 t_stack				*stack_max(t_stack **stack);
+void				stack_print(t_stack **stack, const char *label);
 
 /*  OPERATORS   */
 void				push(t_stack **src, t_stack **dst);
