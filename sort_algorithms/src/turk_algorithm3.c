@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 15:42:45 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:18:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	move_cheapest_btoa(t_stacks *stacks)
 	cheapest = evaluate_cost(stacks->b, stacks->a);
 	get_fewest_rotations(cheapest, cheapest->target, &rot_id);
 	if (rot_id == 0)
-		rot_a_rrot_b(stacks, cheapest);
-	if (rot_id == 1)
 		rrot_a_rot_b(stacks, cheapest);
+	if (rot_id == 1)
+		rot_a_rrot_b(stacks, cheapest);
 	if (rot_id == 2)
 		rotate_both(stacks, cheapest);
 	if (rot_id == 3)

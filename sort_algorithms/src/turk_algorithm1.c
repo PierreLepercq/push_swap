@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:21:29 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 15:05:52 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 18:23:54 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	nrot(t_stack *node)
 
 int	nrrot(t_stack *node)
 {
+	if (node->id == 0)
+		return (0);
 	return (stack_len(&node) - node->id);
 }
 

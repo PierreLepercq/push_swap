@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:16 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 15:41:45 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 17:21:36 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ int	get_fewest_rotations(t_stack *node, t_stack *target, int *id)
 	return (min_rots);
 }
 
-void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
-{
-	moven(stacks, ra, nrot(cheapest->target));
-	moven(stacks, rrb, nrrot(cheapest));
-}
-
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest)
 {
 	moven(stacks, rra, nrrot(cheapest->target));
 	moven(stacks, rb, nrot(cheapest));
+}
+
+void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
+{
+	moven(stacks, ra, nrot(cheapest->target));
+	moven(stacks, rrb, nrrot(cheapest));
 }
 
 void	rotate_both(t_stacks *stacks, t_stack *cheapest)
