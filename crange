@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# C int range
+INT_MIN=-2147483648
+INT_MAX=2147483647
+
+if [ $# -ne 1 ] || ! [[ "$1" =~ ^[0-9]+$ ]] || [ "$1" -lt 1 ]; then
+    echo "Usage: $0 <count>" >&2
+    echo "  count: number of random integers to generate (>= 1)" >&2
+    exit 1
+fi
+
+COUNT=$1
+RANGE=$((INT_MAX - INT_MIN + 1))  # 2^32
+
+declare -A seen
+output=()
+
+while [ ${#output[@]} -lt $COUNT ]; do
+    rand=$(( (RANDOM << 17) ^ (RANDOM << 2) ^ (RANDOM & 3) ))
+    value=$(( (rand % RANGE + RANGE) % RANGE + INT_MIN ))
+    if [[ -z "${seen[$value]+x}" ]]; then
+        seen[$value]=1
+        output+=("$value")
+    fi
+done
+
+echo "${output[*]}"

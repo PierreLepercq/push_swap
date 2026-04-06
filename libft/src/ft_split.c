@@ -6,29 +6,33 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:50:22 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 12:10:22 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:44:04 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	splitcount(const char *s, char sep)
+int	splitcount(const char *str, char sep)
 {
 	int	i;
 	int	count;
 
+	i = 0;
 	count = 0;
-	while (*s)
+	while (str[i] && str[i] == sep)
+		i++;
+	if (str[i])
 	{
-		i = 1;
-		while (s[i] != sep && s[i])
-			i++;
-		if (i > 1)
-			count++;
-		s += i;
-	}
-	if (i > 1)
 		count++;
+		i++;
+	}
+	while (str[i])
+	{
+		if (str[i] != sep && str[i - 1] == sep)
+			count++;
+		i++;
+	}
 	return (count);
 }
 
@@ -83,3 +87,23 @@ char	**ft_split(char const *str, char sep)
 	strs[i] = NULL;
 	return (strs);
 }
+/*
+int	main(int argc, char**argv)
+{
+	int		id;
+	char	*str = "Ceci est un test!";
+	char	**strs;
+
+	strs = ft_split(str, ' ');
+
+	if (!strs)
+		return (0);
+
+	id = 0;
+	while (strs[id])
+	{
+		printf("[%i] %s\n", id, strs[id]);
+		id++;
+	}
+}
+*/

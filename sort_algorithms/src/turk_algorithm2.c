@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:16 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 11:37:36 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:17:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ int	get_fewest_rotations(t_stack *node, t_stack *target, int *id)
 	int	min_rots;
 
 	rot_id = 0;
-	min_rots = nrot(node, 0) + nrrot(target, 1);
-	if (min_rots > nrrot(node, 0) + nrot(target, 1))
+	min_rots = nrot(node) + nrrot(target);
+	if (min_rots > nrrot(node) + nrot(target))
 	{
-		min_rots = nrrot(node, 0) + nrot(target, 1);
+		min_rots = nrrot(node) + nrot(target);
 		rot_id = 1;
 	}
-	if (min_rots > ft_max(nrot(node, 0), nrot(target, 1)))
+	if (min_rots > ft_max(nrot(node), nrot(target)))
 	{
-		min_rots = ft_max(nrot(node, 0), nrot(target, 1));
+		min_rots = ft_max(nrot(node), nrot(target));
 		rot_id = 2;
 	}
-	if (min_rots > ft_max(nrrot(node, 0), nrrot(target, 1)))
+	if (min_rots > ft_max(nrrot(node), nrrot(target)))
 	{
-		min_rots = ft_max(nrrot(node, 0), nrrot(target, 1));
+		min_rots = ft_max(nrrot(node), nrrot(target));
 		rot_id = 3;
 	}
 	if (id != NULL)
@@ -41,26 +41,26 @@ int	get_fewest_rotations(t_stack *node, t_stack *target, int *id)
 
 void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, ra, nrrot(cheapest->target, 1));
-	moven(stacks, rrb, nrot(cheapest, 0));
+	moven(stacks, ra, nrot(cheapest->target));
+	moven(stacks, rrb, nrrot(cheapest));
 }
 
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, rb, nrrot(cheapest, 0));
-	moven(stacks, rra, nrot(cheapest->target, 1));
+	moven(stacks, rb, nrot(cheapest));
+	moven(stacks, rra, nrrot(cheapest->target));
 }
 
 void	rotate_both(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, rr, ft_min(nrot(cheapest, 0), nrot(cheapest->target, 1)));
-	moven(stacks, ra, nrot(cheapest->target, 1));
-	moven(stacks, rb, nrot(cheapest, 0));
+	moven(stacks, rr, ft_min(nrot(cheapest), nrot(cheapest->target)));
+	moven(stacks, ra, nrot(cheapest->target));
+	moven(stacks, rb, nrot(cheapest));
 }
 
 void	rrotate_both(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, rrr, ft_min(nrrot(cheapest, 0), nrrot(cheapest->target, 1)));
-	moven(stacks, rra, nrrot(cheapest->target, 1));
-	moven(stacks, rrb, nrrot(cheapest, 0));
+	moven(stacks, rrr, ft_min(nrrot(cheapest), nrrot(cheapest->target)));
+	moven(stacks, rra, nrrot(cheapest->target));
+	moven(stacks, rrb, nrrot(cheapest));
 }

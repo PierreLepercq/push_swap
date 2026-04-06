@@ -6,23 +6,19 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:21:29 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 11:30:24 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:05:52 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	nrot(t_stack *node, int tail)
+int	nrot(t_stack *node)
 {
-	if (tail)
-		return (node->id + 1);
 	return (node->id);
 }
 
-int	nrrot(t_stack *node, int tail)
+int	nrrot(t_stack *node)
 {
-	if (tail)
-		return (stack_len(&node) - node->id - 1);
 	return (stack_len(&node) - node->id);
 }
 
@@ -39,22 +35,24 @@ void	sort_three_a(t_stacks *stacks)
 		sa(stacks);
 }
 
-t_stack	*get_closest_smaller(t_stack **stack, t_stack *node)
+t_stack	*get_closest_bigger(t_stack **stack, t_stack *node)
 {
 	t_stack	*cursor;
 	t_stack	*closest;
 
 	if (!stack || !*stack || !node)
 		return (NULL);
-	closest = stack_min(stack);
+	closest = stack_max(stack);
+	if (closest->value < node->value)
+		return (closest);
 	cursor = *stack;
 	while (cursor->next != *stack)
 	{
-		if (cursor->value > closest->value && cursor->value < node->value)
+		if (cursor->value < closest->value && cursor->value > node->value)
 			closest = cursor;
 		cursor = cursor->next;
 	}
-	if (cursor->value > closest->value && cursor->value < node->value)
+	if (cursor->value < closest->value && cursor->value > node->value)
 		closest = cursor;
 	if (closest == node)
 		closest = NULL;

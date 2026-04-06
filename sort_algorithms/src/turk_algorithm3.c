@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 12:14:02 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:19:01 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	*get_target(t_stack **stack, t_stack *node)
 {
 	if (stack_min(stack)->value > node->value)
 		return (stack_max(stack));
-	return (get_closest_smaller(stack, node));
+	return (get_closest_bigger(stack, node));
 }
 
 t_stack	*get_median(t_stack **stack)
@@ -30,10 +30,10 @@ t_stack	*get_median(t_stack **stack)
 	if (len % 2 == 1)
 		id++;
 	len = 0;
-	median = stack_max(stack);
+	median = stack_min(stack);
 	while (len < id)
 	{
-		median = get_closest_smaller(stack, median);
+		median = get_closest_bigger(stack, median);
 		if (!median)
 			return (NULL);
 		len++;
@@ -70,6 +70,9 @@ void	move_cheapest_btoa(t_stacks *stacks)
 
 	cheapest = evaluate_cost(stacks->b, stacks->a);
 	get_fewest_rotations(cheapest, cheapest->target, &rot_id);
+	//ft_printf("\ncheapest : %i\n", cheapest->value);
+	//ft_printf("target : %i\n", cheapest->target->value);
+	//ft_printf("rot_id : %i\n\n", rot_id);
 	if (rot_id == 0)
 		rot_a_rrot_b(stacks, cheapest);
 	if (rot_id == 1)
@@ -100,8 +103,8 @@ void	turk_algorithm(t_stacks *stacks)
 	min = stack_min(stacks->a);
 	if (stack_min(stacks->a)->id == 0)
 		return ;
-	if (nrot(min, 0) < nrrot(min, 0))
-		moven(stacks, ra, nrot(min, 0));
+	if (nrot(min) < nrrot(min))
+		moven(stacks, ra, nrot(min));
 	else
-		moven(stacks, rra, nrrot(min, 0));
+		moven(stacks, rra, nrrot(min));
 }
