@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 11:51:01 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:14:02 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ void	move_cheapest_btoa(t_stacks *stacks)
 
 	cheapest = evaluate_cost(stacks->b, stacks->a);
 	get_fewest_rotations(cheapest, cheapest->target, &rot_id);
-	ft_printf("\ncheapest = %i", cheapest->value);
-	ft_printf("\ntarget = %i", cheapest->target->value);
-	ft_printf("\nrot_id = %i\n\n", rot_id);
 	if (rot_id == 0)
 		rot_a_rrot_b(stacks, cheapest);
 	if (rot_id == 1)
@@ -99,14 +96,7 @@ void	turk_algorithm(t_stacks *stacks)
 	if (!stack_is_sorted(stacks->a))
 		sort_three_a(stacks);
 	while (stack_len(stacks->b) > 0)
-	{
-		stack_print(stacks->a, "A");
-		stack_print(stacks->b, "B");
 		move_cheapest_btoa(stacks);
-	}
-	stack_print(stacks->a, "A");
-	stack_print(stacks->b, "B");
-	ft_printf("\n> Move min to Head <\n");
 	min = stack_min(stacks->a);
 	if (stack_min(stacks->a)->id == 0)
 		return ;

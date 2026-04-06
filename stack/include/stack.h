@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 18:09:57 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 00:01:03 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:14:42 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "libft.h"
 # include <stddef.h>
 # include <stdlib.h>
-
-// TODO : remove
-# include <stdio.h>
 
 typedef struct s_stack
 {

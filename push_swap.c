@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:57:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 12:08:16 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:14:14 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ int	*confo_inputs(char **inputs, int *len)
 			return (NULL);
 		i = 0;
 		while (strs[i] != NULL)
-		{
-			ft_printf("\n->%s", strs[i]);
 			i++;
-		}
 		values = strs_to_ints(strs, i);
 		*len = i;
 		while (i > 0)
@@ -127,6 +124,5 @@ int	main(int argc, char **argv)
 		return (free(values), ft_printf("Error\n"), 0);
 	free(values);
 	turk_algorithm(stacks);
-	stack_print(stacks->a, "A");
 	return (stacks_free(stacks), 0);
 }
