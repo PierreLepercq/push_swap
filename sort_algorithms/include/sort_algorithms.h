@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 17:25:15 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/05 19:01:14 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:32:46 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <unistd.h>
 
 /*  TURK ALGORITHM  */
-int	    nrot(t_stack *node);
-int	    nrrot(t_stack *node);
+int		nrot(t_stack *node, int tail);
+int		nrrot(t_stack *node, int tail);
 void	sort_three_a(t_stacks *stacks);
 t_stack	*get_closest_smaller(t_stack **stack, t_stack *node);
-int	    get_fewest_rotations(t_stack *node, t_stack *target, int *id);
+int		get_fewest_rotations(t_stack *node, t_stack *target, int *id);
 void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest);
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest);
 void	rotate_both(t_stacks *stacks, t_stack *cheapest);

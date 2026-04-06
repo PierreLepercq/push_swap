@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:37:46 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/05 22:22:41 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:02:44 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ t_stacks	*stacks_new(void)
 	stacks = malloc(sizeof(t_stacks));
 	if (!stacks)
 		return (NULL);
-    stacks->a = malloc(sizeof(t_stack *));
-    stacks->b = malloc(sizeof(t_stack *));
-    if (!stacks->a || !stacks->b)
-    {
-        free(stacks->a);
-        free(stacks->b);
-        free(stacks);
-        return (NULL);
-    }
+	stacks->a = malloc(sizeof(t_stack *));
+	stacks->b = malloc(sizeof(t_stack *));
+	if (!stacks->a || !stacks->b)
+	{
+		free(stacks->a);
+		free(stacks->b);
+		free(stacks);
+		return (NULL);
+	}
 	*stacks->a = NULL;
 	*stacks->b = NULL;
 	return (stacks);

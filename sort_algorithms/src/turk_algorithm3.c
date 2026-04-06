@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 00:55:09 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:51:01 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,14 @@ void	turk_algorithm(t_stacks *stacks)
 		stack_print(stacks->b, "B");
 		move_cheapest_btoa(stacks);
 	}
+	stack_print(stacks->a, "A");
+	stack_print(stacks->b, "B");
+	ft_printf("\n> Move min to Head <\n");
 	min = stack_min(stacks->a);
 	if (stack_min(stacks->a)->id == 0)
 		return ;
-	if (nrot(min) < nrrot(min))
-		moven(stacks, ra, nrot(min));
+	if (nrot(min, 0) < nrrot(min, 0))
+		moven(stacks, ra, nrot(min, 0));
 	else
-		moven(stacks, rra, nrrot(min));
+		moven(stacks, rra, nrrot(min, 0));
 }

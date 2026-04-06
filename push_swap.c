@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:57:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 00:01:38 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 12:08:16 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,20 @@ int	*confo_inputs(char **inputs, int *len)
 		values = strs_to_ints(inputs, *len);
 	else
 	{
-		strs = ft_split(*inputs, " ");
+		strs = ft_split(*inputs, ' ');
 		if (!strs)
 			return (NULL);
 		i = 0;
 		while (strs[i] != NULL)
+		{
+			ft_printf("\n->%s", strs[i]);
 			i++;
+		}
 		values = strs_to_ints(strs, i);
+		*len = i;
 		while (i > 0)
 			free(strs[i--]);
 		free(strs);
-		*len = i;
 	}
 	return (values);
 }
@@ -111,7 +114,7 @@ int	main(int argc, char **argv)
 	int			*values;
 	t_stacks	*stacks;
 
-	if (argc == 1)
+	if (argc == 1 || (argc == 2 && *(argv[1]) == '\0'))
 		return (0);
 	len = argc - 1;
 	values = confo_inputs(&argv[1], &len);
@@ -124,8 +127,6 @@ int	main(int argc, char **argv)
 		return (free(values), ft_printf("Error\n"), 0);
 	free(values);
 	turk_algorithm(stacks);
-
 	stack_print(stacks->a, "A");
-
 	return (stacks_free(stacks), 0);
 }

@@ -6,19 +6,23 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:21:29 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 00:51:06 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 11:30:24 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort_algorithms.h"
 
-int	nrot(t_stack *node)
+int	nrot(t_stack *node, int tail)
 {
+	if (tail)
+		return (node->id + 1);
 	return (node->id);
 }
 
-int	nrrot(t_stack *node)
+int	nrrot(t_stack *node, int tail)
 {
+	if (tail)
+		return (stack_len(&node) - node->id - 1);
 	return (stack_len(&node) - node->id);
 }
 
@@ -41,7 +45,7 @@ t_stack	*get_closest_smaller(t_stack **stack, t_stack *node)
 	t_stack	*closest;
 
 	if (!stack || !*stack || !node)
-        return (NULL);
+		return (NULL);
 	closest = stack_min(stack);
 	cursor = *stack;
 	while (cursor->next != *stack)
