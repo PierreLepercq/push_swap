@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:44:06 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 12:07:51 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:19:45 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				**ft_split(const char *str, char sep);
-char				*ft_substr(const char *str, int start, int len);
+char				*ft_substr(const char *str, unsigned int start, size_t len);
 char				*ft_strnstr(const char *big, const char *lit, size_t len);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));

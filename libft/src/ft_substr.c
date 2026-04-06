@@ -5,38 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/05 16:52:20 by plepercq          #+#    #+#             */
-/*   Updated: 2026/03/17 18:39:28 by plepercq         ###   ########.fr       */
+/*   Created: 2025/11/16 19:59:58 by plepercq          #+#    #+#             */
+/*   Updated: 2026/04/06 19:20:00 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(const char *str, int start, int len)
+char	*ft_substr(const char *str, unsigned int start, size_t len)
 {
-	int		strlen;
-	int		substrlen;
+	int		sublen;
 	char	*substr;
 
-	if (!str)
-		return (NULL);
-	strlen = 0;
-	while (str[strlen] != '\0')
-		strlen++;
-	substrlen = 0;
-	if (start < strlen)
-		substrlen = 0;
-	else if (strlen - start < len)
-		substrlen = strlen - start;
-	substr = malloc(sizeof(char) * (substrlen + 1));
+	if (ft_strlen(str) < start)
+		sublen = 0;
+	else
+		sublen = ft_strlen(str) - start;
+	if (len < (size_t)sublen)
+		sublen = len;
+	substr = malloc(sizeof(char) * (sublen + 1));
 	if (!substr)
-		return (NULL);
-	strlen = 0;
-	while (strlen < len)
-	{
-		substr[strlen] = str[start + strlen];
-		strlen++;
-	}
-	substr[strlen] = '\0';
+		return (0);
+	if (sublen == 0)
+		*substr = '\0';
+	else
+		ft_strlcpy(substr, str + start, sublen + 1);
 	return (substr);
 }

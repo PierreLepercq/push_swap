@@ -6,14 +6,14 @@
 #    By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 15:39:25 by plepercq          #+#    #+#              #
-#    Updated: 2026/04/06 00:00:46 by plepercq         ###   ########.fr        #
+#    Updated: 2026/04/06 19:24:51 by plepercq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= push_swap
 
 CC			= cc
-CFLAGS		= -Wall -Werror -Wextra -g
+CFLAGS		= -Wall -Werror -Wextra
 
 LIBS		= ft
 LIBS_DIR	= $(foreach lib, $(LIBS), lib$(lib))

@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:57:32 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 18:36:36 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 19:05:45 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	*confo_inputs(char **inputs, int *len)
 			i++;
 		values = strs_to_ints(strs, i);
 		*len = i;
-		while (i > 0)
+		while (i >= 0)
 			free(strs[i--]);
 		free(strs);
 	}
