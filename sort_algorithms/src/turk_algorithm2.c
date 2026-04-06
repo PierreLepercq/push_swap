@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:16 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 15:17:13 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:41:45 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	rot_a_rrot_b(t_stacks *stacks, t_stack *cheapest)
 
 void	rrot_a_rot_b(t_stacks *stacks, t_stack *cheapest)
 {
-	moven(stacks, rb, nrot(cheapest));
 	moven(stacks, rra, nrrot(cheapest->target));
+	moven(stacks, rb, nrot(cheapest));
 }
 
 void	rotate_both(t_stacks *stacks, t_stack *cheapest)

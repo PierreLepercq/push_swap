@@ -6,7 +6,7 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 15:35:19 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 15:19:01 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:42:45 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_stack	*get_target(t_stack **stack, t_stack *node)
 {
-	if (stack_min(stack)->value > node->value)
-		return (stack_max(stack));
+	if (stack_max(stack)->value < node->value)
+		return (stack_min(stack));
 	return (get_closest_bigger(stack, node));
 }
 
@@ -70,9 +70,6 @@ void	move_cheapest_btoa(t_stacks *stacks)
 
 	cheapest = evaluate_cost(stacks->b, stacks->a);
 	get_fewest_rotations(cheapest, cheapest->target, &rot_id);
-	//ft_printf("\ncheapest : %i\n", cheapest->value);
-	//ft_printf("target : %i\n", cheapest->target->value);
-	//ft_printf("rot_id : %i\n\n", rot_id);
 	if (rot_id == 0)
 		rot_a_rrot_b(stacks, cheapest);
 	if (rot_id == 1)
