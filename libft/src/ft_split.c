@@ -6,12 +6,11 @@
 /*   By: plepercq <plepercq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:50:22 by plepercq          #+#    #+#             */
-/*   Updated: 2026/04/06 14:44:04 by plepercq         ###   ########.fr       */
+/*   Updated: 2026/04/13 09:27:13 by plepercq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 int	splitcount(const char *str, char sep)
 {
@@ -87,23 +86,3 @@ char	**ft_split(char const *str, char sep)
 	strs[i] = NULL;
 	return (strs);
 }
-/*
-int	main(int argc, char**argv)
-{
-	int		id;
-	char	*str = "Ceci est un test!";
-	char	**strs;
-
-	strs = ft_split(str, ' ');
-
-	if (!strs)
-		return (0);
-
-	id = 0;
-	while (strs[id])
-	{
-		printf("[%i] %s\n", id, strs[id]);
-		id++;
-	}
-}
-*/
